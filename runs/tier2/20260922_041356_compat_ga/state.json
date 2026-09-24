@@ -1,0 +1,137 @@
+{
+  "generation": 1,
+  "population": [
+    {
+      "survival_weight": 2.267328062326385,
+      "distance_weight": 2.799138941278677,
+      "tag_penalty": 86.6571258543256,
+      "fall_penalty": 36.11219329093853,
+      "oni_speed": 0.024078405696352972,
+      "learning_rate": 0.00010911353949367224,
+      "gamma": 0.995607431076278,
+      "gae_lambda": 0.9853248914879063,
+      "ent_coef": 0.004497690401208315,
+      "n_steps": 2048,
+      "batch_size": 128,
+      "n_epochs": 5,
+      "net_arch": [
+        256,
+        256
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 13.515274982463266,
+      "distance_closing_penalty": 9.976470844485375,
+      "wall_penalty_weight": 4.984100867459752,
+      "danger_wall_penalty_weight": 6.847455411702583,
+      "escape_bonus": 50.17142289716424,
+      "action_change_weight": 0.03948622931722597,
+      "lateral_action_weight": 0.1041123330591337,
+      "yaw_action_weight": 0.019512870150970557,
+      "stall_penalty_weight": 0.026016349019791205
+    },
+    {
+      "survival_weight": 2.047693624536265,
+      "distance_weight": 2.2633618392220467,
+      "tag_penalty": 149.1865864277374,
+      "fall_penalty": 36.11219329093853,
+      "oni_speed": 0.024078405696352972,
+      "learning_rate": 0.00010911353949367224,
+      "gamma": 0.995607431076278,
+      "gae_lambda": 0.9853248914879063,
+      "ent_coef": 0.002314573784471781,
+      "n_steps": 2048,
+      "batch_size": 256,
+      "n_epochs": 5,
+      "net_arch": [
+        256,
+        256
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 4.941899560617365,
+      "distance_closing_penalty": 9.976470844485375,
+      "wall_penalty_weight": 5.89153849488962,
+      "danger_wall_penalty_weight": 6.847455411702583,
+      "escape_bonus": 151.80859389633378,
+      "action_change_weight": 0.011964026643860946,
+      "lateral_action_weight": 0.009629798142468728,
+      "yaw_action_weight": 0.019512870150970557,
+      "stall_penalty_weight": 0.026016349019791205
+    }
+  ],
+  "best_record": {
+    "candidate_id": "cand_1f2dd06827e6",
+    "generation": 0,
+    "index": 1,
+    "candidate_dir": "runs\\tier2\\20260922_041356_compat_ga\\candidates\\cand_1f2dd06827e6",
+    "individual": {
+      "survival_weight": 2.267328062326385,
+      "distance_weight": 2.799138941278677,
+      "tag_penalty": 86.6571258543256,
+      "fall_penalty": 36.11219329093853,
+      "oni_speed": 0.024078405696352972,
+      "learning_rate": 0.00010911353949367224,
+      "gamma": 0.995607431076278,
+      "gae_lambda": 0.9853248914879063,
+      "ent_coef": 0.004497690401208315,
+      "n_steps": 2048,
+      "batch_size": 128,
+      "n_epochs": 5,
+      "net_arch": [
+        256,
+        256
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 13.515274982463266,
+      "distance_closing_penalty": 9.976470844485375,
+      "wall_penalty_weight": 4.984100867459752,
+      "danger_wall_penalty_weight": 6.847455411702583,
+      "escape_bonus": 50.17142289716424,
+      "action_change_weight": 0.03948622931722597,
+      "lateral_action_weight": 0.1041123330591337,
+      "yaw_action_weight": 0.019512870150970557,
+      "stall_penalty_weight": 0.026016349019791205
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8387061537858995,
+        "min_distance": 1.8387061537858995,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6368072275888335,
+        "min_distance": 1.6368072275888335,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8295962174386022,
+        "min_distance": 1.8295962174386022,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.7683698662711116,
+      "min_distance": 1.6368072275888335,
+      "score": -86.21326026745778
+    }
+  }
+}

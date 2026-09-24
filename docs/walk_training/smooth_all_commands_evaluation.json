@@ -1,0 +1,784 @@
+{
+  "rows": [
+    {
+      "command": "stand",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.00022631215697869079,
+        1.8949225892613372e-07,
+        -1.6177012330971643e-05
+      ],
+      "velocity_rmse": [
+        0.00032730031745423004,
+        8.248385779034609e-06,
+        2.0370512919650058e-05
+      ],
+      "mean_tilt_rad": 0.012792406467803646,
+      "mean_height_m": 0.314651603322283,
+      "min_height_m": 0.3138748941654537,
+      "height_std_m": 0.0002523558226306128,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.15299016963768491,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.15221920263398295,
+      "joint_speed_rms_rad_s": 0.0004581605412577619,
+      "action_change_rms": 3.4070777132910735e-07,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 7.427683321286819e-05,
+      "passed": true,
+      "posture_passed": true,
+      "startup_passed": true
+    },
+    {
+      "command": "stand",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.0002032896301295176,
+        -4.613120762150519e-05,
+        -8.048869067569854e-05
+      ],
+      "velocity_rmse": [
+        0.0002868489007747412,
+        7.727700073970125e-05,
+        9.350369770473874e-05
+      ],
+      "mean_tilt_rad": 0.0196529988639886,
+      "mean_height_m": 0.31451060388894286,
+      "min_height_m": 0.3138281847403123,
+      "height_std_m": 0.00022127694571016313,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.14856574417545163,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.14429968592116266,
+      "joint_speed_rms_rad_s": 0.00041835793987632017,
+      "action_change_rms": 3.128607488633861e-07,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 6.316445322176023e-05,
+      "passed": true,
+      "posture_passed": true,
+      "startup_passed": true
+    },
+    {
+      "command": "stand",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.00033239927934616755,
+        2.3865978145266335e-05,
+        3.8339090600690985e-05
+      ],
+      "velocity_rmse": [
+        0.0004548093814332437,
+        3.345570966129382e-05,
+        3.889265397895602e-05
+      ],
+      "mean_tilt_rad": 0.027790784187241804,
+      "mean_height_m": 0.3143653117784318,
+      "min_height_m": 0.31320690600271556,
+      "height_std_m": 0.00039450841961561473,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.1422716123000588,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.1377601656332973,
+      "joint_speed_rms_rad_s": 0.0006080418328954835,
+      "action_change_rms": 3.6737483810611593e-07,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.00010077820553767831,
+      "passed": true,
+      "posture_passed": true,
+      "startup_passed": true
+    },
+    {
+      "command": "forward",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0.4,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.43072812952250195,
+        -0.00023848221087205074,
+        -0.0003279114496839681
+      ],
+      "velocity_rmse": [
+        0.07838853405868051,
+        0.04299342408433069,
+        0.27533261385946883
+      ],
+      "mean_tilt_rad": 0.056471169851606176,
+      "mean_height_m": 0.29740343928868007,
+      "min_height_m": 0.28331893858514895,
+      "height_std_m": 0.009473977136883466,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.09104075568084427,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.06242406026668465,
+      "joint_speed_rms_rad_s": 1.7240578248757688,
+      "action_change_rms": 0.06387871503829956,
+      "dominant_joint_frequency_hz": 1.4736842105263157,
+      "vertical_speed_rms": 0.1762789252645579,
+      "passed": true,
+      "posture_passed": true,
+      "startup_passed": true
+    },
+    {
+      "command": "forward",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0.4,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.42928240616941826,
+        -0.0005487197830484803,
+        -0.000753940382181231
+      ],
+      "velocity_rmse": [
+        0.0773867186193745,
+        0.0427295202995329,
+        0.27502635080216237
+      ],
+      "mean_tilt_rad": 0.05646862066971105,
+      "mean_height_m": 0.2973847365188176,
+      "min_height_m": 0.2832898073641096,
+      "height_std_m": 0.009486157363791539,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.09108494694069044,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.06838029975073062,
+      "joint_speed_rms_rad_s": 1.7203813374154955,
+      "action_change_rms": 0.06379396468400955,
+      "dominant_joint_frequency_hz": 1.4736842105263157,
+      "vertical_speed_rms": 0.1763276097272352,
+      "passed": true,
+      "posture_passed": true,
+      "startup_passed": true
+    },
+    {
+      "command": "forward",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0.4,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.42901735803785623,
+        -0.0008208633537399792,
+        -0.0009831080728623866
+      ],
+      "velocity_rmse": [
+        0.07719983685677932,
+        0.04278543773605684,
+        0.2746873931872615
+      ],
+      "mean_tilt_rad": 0.056528463951087626,
+      "mean_height_m": 0.29740840361348564,
+      "min_height_m": 0.283366252751825,
+      "height_std_m": 0.009488726655526285,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.09179075905964074,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.07363562164387016,
+      "joint_speed_rms_rad_s": 1.7218168259566955,
+      "action_change_rms": 0.0638112872838974,
+      "dominant_joint_frequency_hz": 1.4736842105263157,
+      "vertical_speed_rms": 0.1764394209444209,
+      "passed": true,
+      "posture_passed": true,
+      "startup_passed": true
+    },
+    {
+      "command": "backward",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        -0.3,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.00022455741111521943,
+        1.9879455644810084e-05,
+        1.577202803612128e-05
+      ],
+      "velocity_rmse": [
+        0.30022465104158946,
+        3.813793606835034e-05,
+        2.4674985433318348e-05
+      ],
+      "mean_tilt_rad": 0.013874306249702855,
+      "mean_height_m": 0.3100703355332081,
+      "min_height_m": 0.3093642935784743,
+      "height_std_m": 0.00023276381651191226,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.14937416171732443,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.1488915815956638,
+      "joint_speed_rms_rad_s": 0.0004656730262407247,
+      "action_change_rms": 9.043678801390342e-07,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 6.70965122414854e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "backward",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        -0.3,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.00019660059540321697,
+        -3.6143315862531974e-05,
+        -1.1663494284331787e-05
+      ],
+      "velocity_rmse": [
+        0.300196665849524,
+        6.893449285508185e-05,
+        1.6638686747478924e-05
+      ],
+      "mean_tilt_rad": 0.019695730995212265,
+      "mean_height_m": 0.3102672274261454,
+      "min_height_m": 0.30967690057356373,
+      "height_std_m": 0.0001934612771827399,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.14532949907249665,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.14386580411389,
+      "joint_speed_rms_rad_s": 0.0004077238138784417,
+      "action_change_rms": 7.021440069365781e-07,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 5.509106535498675e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "backward",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        -0.3,
+        0,
+        0
+      ],
+      "mean_velocity": [
+        0.0002889224833633858,
+        5.5743459793096824e-05,
+        7.01656354619577e-05
+      ],
+      "velocity_rmse": [
+        0.30028904058174305,
+        7.705806751951134e-05,
+        7.580419456970604e-05
+      ],
+      "mean_tilt_rad": 0.03170832914656762,
+      "mean_height_m": 0.3099717624814317,
+      "min_height_m": 0.30907126089144565,
+      "height_std_m": 0.0003083662440688915,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.13764655848390178,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.13707789134914375,
+      "joint_speed_rms_rad_s": 0.0005377267273568503,
+      "action_change_rms": 1.3123367352818605e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 7.648540022234375e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "left",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "mean_velocity": [
+        0.00028475004410661496,
+        -2.7472530081605608e-05,
+        0.00020464449575219372
+      ],
+      "velocity_rmse": [
+        0.0005167842698792349,
+        0.2000274817793897,
+        0.0002862731183336894
+      ],
+      "mean_tilt_rad": 0.05046642352469158,
+      "mean_height_m": 0.26897116160027706,
+      "min_height_m": 0.2677597616764518,
+      "height_std_m": 0.00035675722602812935,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07396395174371234,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.06492788556767842,
+      "joint_speed_rms_rad_s": 0.0008623515929642461,
+      "action_change_rms": 1.540722769277636e-05,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.0001404687230022102,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "left",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "mean_velocity": [
+        0.00028761603672079815,
+        -2.6987377088521898e-05,
+        0.00022836368954210856
+      ],
+      "velocity_rmse": [
+        0.0003866437890462451,
+        0.200026992692059,
+        0.0002702087624152333
+      ],
+      "mean_tilt_rad": 0.04374365075309174,
+      "mean_height_m": 0.26895137028804794,
+      "min_height_m": 0.267647562783067,
+      "height_std_m": 0.00042123925875585654,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07570280189103981,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.06910276678550606,
+      "joint_speed_rms_rad_s": 0.0006393178534979641,
+      "action_change_rms": 4.999371867597802e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.00011502502585329999,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "left",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "mean_velocity": [
+        0.00023162455222368086,
+        -1.0022814628880955e-05,
+        0.00024253493021520356
+      ],
+      "velocity_rmse": [
+        0.00031357063926154923,
+        0.20001002607822746,
+        0.00028501551823781557
+      ],
+      "mean_tilt_rad": 0.03626371426804978,
+      "mean_height_m": 0.2693788565222663,
+      "min_height_m": 0.26834714629556067,
+      "height_std_m": 0.00032406748475746804,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.08127269701731535,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.07293893951965943,
+      "joint_speed_rms_rad_s": 0.0005389575362736782,
+      "action_change_rms": 3.7588590657833265e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 9.510223357250174e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "right",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        -0.2,
+        0
+      ],
+      "mean_velocity": [
+        0.0001850088053095864,
+        -3.0960003966950346e-05,
+        -0.0004153519739467935
+      ],
+      "velocity_rmse": [
+        0.00023159438951398807,
+        0.1999690411452012,
+        0.00047673923530146354
+      ],
+      "mean_tilt_rad": 0.053779521085872174,
+      "mean_height_m": 0.28691897068797717,
+      "min_height_m": 0.28608184706845263,
+      "height_std_m": 0.0002358760584848458,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.10155057080424298,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.09230003953973043,
+      "joint_speed_rms_rad_s": 0.00045636339571604944,
+      "action_change_rms": 3.1437325560546014e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 9.05665176518056e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "right",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        -0.2,
+        0
+      ],
+      "mean_velocity": [
+        0.00017832142208857219,
+        -3.1030900427289756e-05,
+        -0.0004327828202138978
+      ],
+      "velocity_rmse": [
+        0.00022010911015839168,
+        0.1999689708502988,
+        0.0004976986159800336
+      ],
+      "mean_tilt_rad": 0.05431412829563207,
+      "mean_height_m": 0.2867532839013706,
+      "min_height_m": 0.2859338244738917,
+      "height_std_m": 0.000224669841724515,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.10184406962982664,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.09199561695630282,
+      "joint_speed_rms_rad_s": 0.00047714295007595173,
+      "action_change_rms": 4.212152362015331e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 9.360645116720427e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "right",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        -0.2,
+        0
+      ],
+      "mean_velocity": [
+        0.00025382719784324004,
+        3.2802392928137155e-06,
+        -0.0002873245106094518
+      ],
+      "velocity_rmse": [
+        0.0003383339771190262,
+        0.20000328220648067,
+        0.0003184323454584546
+      ],
+      "mean_tilt_rad": 0.0616707319659222,
+      "mean_height_m": 0.2865762868837921,
+      "min_height_m": 0.2853114809833615,
+      "height_std_m": 0.00038427546063880174,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.09306771587232757,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.08641012886458929,
+      "joint_speed_rms_rad_s": 0.0005306630005730641,
+      "action_change_rms": 4.158311185165076e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.00011870083162858098,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "turn_left",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        0.4
+      ],
+      "mean_velocity": [
+        0.0002007837715167219,
+        -3.6113477389522167e-07,
+        0.00017281484409185617
+      ],
+      "velocity_rmse": [
+        0.0002758853727171106,
+        2.3722833679826007e-05,
+        0.3998271899994749
+      ],
+      "mean_tilt_rad": 0.050594854878486466,
+      "mean_height_m": 0.27532607112927654,
+      "min_height_m": 0.2743583902417278,
+      "height_std_m": 0.000315881444067064,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.0890902984276726,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.07863395205889581,
+      "joint_speed_rms_rad_s": 0.00044965588400129505,
+      "action_change_rms": 7.667557838431094e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 8.42778443438522e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "turn_left",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        0.4
+      ],
+      "mean_velocity": [
+        0.00026651652150679246,
+        4.192935149150701e-07,
+        3.9944284979681376e-05
+      ],
+      "velocity_rmse": [
+        0.0004106127306228251,
+        2.2930892597034777e-05,
+        0.3999600558475582
+      ],
+      "mean_tilt_rad": 0.036424581850263676,
+      "mean_height_m": 0.27610913611983817,
+      "min_height_m": 0.2745648343344886,
+      "height_std_m": 0.000453672276369179,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.1011889440040889,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.10032188432619227,
+      "joint_speed_rms_rad_s": 0.0006657220918911865,
+      "action_change_rms": 7.0031528593972325e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.0001501851777835498,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "turn_left",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        0.4
+      ],
+      "mean_velocity": [
+        0.00023654654886456195,
+        3.2662454729787204e-05,
+        8.781946269223038e-05
+      ],
+      "velocity_rmse": [
+        0.000350742685984833,
+        3.669535515434325e-05,
+        0.399912182557421
+      ],
+      "mean_tilt_rad": 0.0439376598540565,
+      "mean_height_m": 0.2740273983366119,
+      "min_height_m": 0.2725403789946354,
+      "height_std_m": 0.0004358564976509041,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.09999095482316078,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.09934529170327433,
+      "joint_speed_rms_rad_s": 0.0005898882540467031,
+      "action_change_rms": 6.869902790640481e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.00014428521354529992,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "turn_right",
+      "seed": 100,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        -0.4
+      ],
+      "mean_velocity": [
+        0.0003581083944714511,
+        -2.8637329821464384e-05,
+        -8.138694475813846e-05
+      ],
+      "velocity_rmse": [
+        0.0004954128872182253,
+        3.8119618695971475e-05,
+        0.3999186136213166
+      ],
+      "mean_tilt_rad": 0.012687982877384334,
+      "mean_height_m": 0.32277525275267444,
+      "min_height_m": 0.3214985117443525,
+      "height_std_m": 0.00043981270361656024,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.1554513885539326,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.15212798749504258,
+      "joint_speed_rms_rad_s": 0.0006813838836121844,
+      "action_change_rms": 5.620780029857997e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.0001181908649502695,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "turn_right",
+      "seed": 101,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        -0.4
+      ],
+      "mean_velocity": [
+        0.00031499800995807433,
+        -7.319530892514011e-05,
+        -0.00019211882804801884
+      ],
+      "velocity_rmse": [
+        0.00041768769974688617,
+        0.00011985716801587412,
+        0.399807886181067
+      ],
+      "mean_tilt_rad": 0.02327500839974397,
+      "mean_height_m": 0.322156729691549,
+      "min_height_m": 0.3210487074182534,
+      "height_std_m": 0.00039850033103501297,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.1491247382870428,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.14423568481626586,
+      "joint_speed_rms_rad_s": 0.0006020348324633361,
+      "action_change_rms": 5.517682438949123e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 9.613758961829559e-05,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    },
+    {
+      "command": "turn_right",
+      "seed": 102,
+      "fell": false,
+      "seconds": 20.0,
+      "target": [
+        0,
+        0,
+        -0.4
+      ],
+      "mean_velocity": [
+        0.0003851416712399916,
+        -3.34330476878426e-06,
+        -3.529183054297385e-05
+      ],
+      "velocity_rmse": [
+        0.000511973662977722,
+        5.138374645633169e-06,
+        0.3999647087773448
+      ],
+      "mean_tilt_rad": 0.022788159015820188,
+      "mean_height_m": 0.3226195667209305,
+      "min_height_m": 0.32122531484874406,
+      "height_std_m": 0.00048393386798394083,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.14949386194895117,
+      "whole_episode_nonfoot_contact_fraction": 0.0,
+      "whole_episode_min_hind_knee_height_m": 0.13780981014487761,
+      "joint_speed_rms_rad_s": 0.0006830527188955311,
+      "action_change_rms": 6.243249572435161e-06,
+      "dominant_joint_frequency_hz": null,
+      "vertical_speed_rms": 0.00012311112024307076,
+      "passed": false,
+      "posture_passed": false,
+      "startup_passed": true
+    }
+  ],
+  "fall_rate": 0.0,
+  "passed": false,
+  "posture_passed": false,
+  "startup_passed": true,
+  "posture_criteria": {
+    "mean_height_min_m": 0.24,
+    "min_height_m": 0.22,
+    "height_std_max_m": 0.02,
+    "nonfoot_contact_fraction_max": 0,
+    "hind_knee_height_min_m": 0.06,
+    "warmup_seconds": 1,
+    "startup": "separately checks contacts and knee height including first second"
+  },
+  "criteria": {
+    "duration_seconds": 20,
+    "warmup_seconds": 1,
+    "mean_error": "max(35% of target, [0.06 m/s, 0.06 m/s, 0.12 rad/s])",
+    "rmse_max": [
+      0.2,
+      0.15,
+      0.3
+    ],
+    "mean_tilt_max_rad": 0.35
+  }
+}

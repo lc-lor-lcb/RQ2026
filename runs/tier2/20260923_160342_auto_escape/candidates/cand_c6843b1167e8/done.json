@@ -1,0 +1,83 @@
+{
+  "candidate_id": "cand_c6843b1167e8",
+  "generation": 0,
+  "index": 0,
+  "candidate_dir": "runs\\tier2\\20260923_160342_auto_escape\\candidates\\cand_c6843b1167e8",
+  "individual": {
+    "survival_weight": 1.0,
+    "distance_weight": 2.0,
+    "tag_penalty": 120.0,
+    "fall_penalty": 120.0,
+    "oni_speed": 0.025,
+    "learning_rate": 0.0001,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ent_coef": 0.001,
+    "n_steps": 256,
+    "batch_size": 64,
+    "n_epochs": 2,
+    "net_arch": [
+      64,
+      64
+    ],
+    "flee_timesteps": 5000,
+    "flee_num_envs": 1
+  },
+  "eval_results": [
+    {
+      "seed": 100,
+      "survived_seconds": 1.2,
+      "mean_distance": 1.210476868205102,
+      "min_distance": 0.6226630698355538,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 101,
+      "survived_seconds": 1.0,
+      "mean_distance": 1.1266817532820788,
+      "min_distance": 0.64161222861991,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 102,
+      "survived_seconds": 1.0,
+      "mean_distance": 1.215914010196872,
+      "min_distance": 0.6417041654509051,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 103,
+      "survived_seconds": 0.8,
+      "mean_distance": 1.0161639967809508,
+      "min_distance": 0.6232530673235731,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 104,
+      "survived_seconds": 1.2,
+      "mean_distance": 1.2831587510286817,
+      "min_distance": 0.6415168618044849,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    }
+  ],
+  "summary": {
+    "mean_survived_seconds": 1.04,
+    "worst_survived_seconds": 0.8,
+    "escaped_count": 0,
+    "tagged_count": 5,
+    "fell_count": 0,
+    "mean_distance": 1.170479075898737,
+    "min_distance": 0.6226630698355538,
+    "score": -56.419041848202525
+  }
+}

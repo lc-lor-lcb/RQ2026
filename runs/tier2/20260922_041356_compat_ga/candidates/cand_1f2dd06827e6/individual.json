@@ -1,0 +1,29 @@
+{
+  "survival_weight": 2.267328062326385,
+  "distance_weight": 2.799138941278677,
+  "tag_penalty": 86.6571258543256,
+  "fall_penalty": 36.11219329093853,
+  "oni_speed": 0.024078405696352972,
+  "learning_rate": 0.00010911353949367224,
+  "gamma": 0.995607431076278,
+  "gae_lambda": 0.9853248914879063,
+  "ent_coef": 0.004497690401208315,
+  "n_steps": 2048,
+  "batch_size": 128,
+  "n_epochs": 5,
+  "net_arch": [
+    256,
+    256
+  ],
+  "flee_timesteps": 2000,
+  "flee_num_envs": 1,
+  "distance_delta_weight": 13.515274982463266,
+  "distance_closing_penalty": 9.976470844485375,
+  "wall_penalty_weight": 4.984100867459752,
+  "danger_wall_penalty_weight": 6.847455411702583,
+  "escape_bonus": 50.17142289716424,
+  "action_change_weight": 0.03948622931722597,
+  "lateral_action_weight": 0.1041123330591337,
+  "yaw_action_weight": 0.019512870150970557,
+  "stall_penalty_weight": 0.026016349019791205
+}

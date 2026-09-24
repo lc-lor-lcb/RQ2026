@@ -1,0 +1,594 @@
+[
+  {
+    "candidate_id": "cand_45bd891b9748",
+    "generation": 1,
+    "index": 7,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_45bd891b9748",
+    "individual": {
+      "survival_weight": 0.4409586284754778,
+      "distance_weight": 1.7776135157086788,
+      "tag_penalty": 144.54646113279534,
+      "fall_penalty": 26.30059313355078,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 0.0004775093445985413,
+      "gamma": 0.9677748758282154,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 2048,
+      "batch_size": 64,
+      "n_epochs": 10,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 16.294961469565763,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 1.1393336071477285,
+      "danger_wall_penalty_weight": 5.53000511885829,
+      "escape_bonus": 51.07768508784057,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8713647174671932,
+        "min_distance": 1.8713647174671932,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.669464317608103,
+        "min_distance": 1.669464317608103,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8622568423421024,
+        "min_distance": 1.8622568423421024,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.8010286258057995,
+      "min_distance": 1.669464317608103,
+      "score": -86.1479427483884
+    }
+  },
+  {
+    "candidate_id": "cand_02f32f8669bf",
+    "generation": 2,
+    "index": 3,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_02f32f8669bf",
+    "individual": {
+      "survival_weight": 0.4409586284754778,
+      "distance_weight": 3.807375207688098,
+      "tag_penalty": 144.54646113279534,
+      "fall_penalty": 26.30059313355078,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 1.0147399923951465e-05,
+      "gamma": 0.9677748758282154,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 2048,
+      "batch_size": 256,
+      "n_epochs": 10,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 16.294961469565763,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 1.1393336071477285,
+      "danger_wall_penalty_weight": 9.36570456425744,
+      "escape_bonus": 97.41075463133645,
+      "action_change_weight": 0.014945954945161537,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8713639600163625,
+        "min_distance": 1.8713639600163625,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6694657857204005,
+        "min_distance": 1.6694657857204005,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.862253828672314,
+        "min_distance": 1.862253828672314,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.801027858136359,
+      "min_distance": 1.6694657857204005,
+      "score": -86.14794428372728
+    }
+  },
+  {
+    "candidate_id": "cand_9f21e1654c48",
+    "generation": 2,
+    "index": 6,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_9f21e1654c48",
+    "individual": {
+      "survival_weight": 0.4409586284754778,
+      "distance_weight": 1.7776135157086788,
+      "tag_penalty": 144.54646113279534,
+      "fall_penalty": 26.30059313355078,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 0.0004775093445985413,
+      "gamma": 0.9715690087997996,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 2048,
+      "batch_size": 64,
+      "n_epochs": 5,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 6.552911744092521,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 1.1393336071477285,
+      "danger_wall_penalty_weight": 5.53000511885829,
+      "escape_bonus": 51.07768508784057,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07742363536878062,
+      "yaw_action_weight": 0.05898266945163425,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8713627460194306,
+        "min_distance": 1.8713627460194306,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6694634048413914,
+        "min_distance": 1.6694634048413914,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8622569255858514,
+        "min_distance": 1.8622569255858514,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.8010276921488912,
+      "min_distance": 1.6694634048413914,
+      "score": -86.14794461570222
+    }
+  },
+  {
+    "candidate_id": "cand_1ba83c0cbd44",
+    "generation": 2,
+    "index": 1,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_1ba83c0cbd44",
+    "individual": {
+      "survival_weight": 1.1665329150005377,
+      "distance_weight": 1.7776135157086788,
+      "tag_penalty": 144.54646113279534,
+      "fall_penalty": 87.55019938710701,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 5.697978552354131e-05,
+      "gamma": 0.9677748758282154,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.003282633873750799,
+      "n_steps": 2048,
+      "batch_size": 64,
+      "n_epochs": 10,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 16.294961469565763,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 1.1393336071477285,
+      "danger_wall_penalty_weight": 5.53000511885829,
+      "escape_bonus": 51.07768508784057,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8713625742696938,
+        "min_distance": 1.8713625742696938,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6694646148695755,
+        "min_distance": 1.6694646148695755,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.862253820214247,
+        "min_distance": 1.862253820214247,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.8010270031178388,
+      "min_distance": 1.6694646148695755,
+      "score": -86.14794599376432
+    }
+  },
+  {
+    "candidate_id": "cand_a375774726f5",
+    "generation": 2,
+    "index": 5,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_a375774726f5",
+    "individual": {
+      "survival_weight": 0.811505690195715,
+      "distance_weight": 0.8188586617205178,
+      "tag_penalty": 108.55530918281977,
+      "fall_penalty": 145.86869529216835,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 0.0004775093445985413,
+      "gamma": 0.9677748758282154,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 2048,
+      "batch_size": 64,
+      "n_epochs": 10,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 2.709640406385871,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 3.2421846986214353,
+      "danger_wall_penalty_weight": 2.415405071430892,
+      "escape_bonus": 51.07768508784057,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.871360787956538,
+        "min_distance": 1.871360787956538,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6694633696166663,
+        "min_distance": 1.6694633696166663,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8622566462216372,
+        "min_distance": 1.8622566462216372,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.8010269345982806,
+      "min_distance": 1.6694633696166663,
+      "score": -86.14794613080345
+    }
+  },
+  {
+    "candidate_id": "cand_dcb5a9d365ea",
+    "generation": 2,
+    "index": 2,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_dcb5a9d365ea",
+    "individual": {
+      "survival_weight": 0.4409586284754778,
+      "distance_weight": 1.7140287101208211,
+      "tag_penalty": 144.54646113279534,
+      "fall_penalty": 26.30059313355078,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 0.0004775093445985413,
+      "gamma": 0.9677748758282154,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 512,
+      "batch_size": 128,
+      "n_epochs": 10,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 15.775057231151097,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 3.2337479057715104,
+      "danger_wall_penalty_weight": 1.500410775859972,
+      "escape_bonus": 51.07768508784057,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.871361838348261,
+        "min_distance": 1.871361838348261,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.66946432443518,
+        "min_distance": 1.66946432443518,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8622540176737723,
+        "min_distance": 1.8622540176737723,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.801026726819071,
+      "min_distance": 1.66946432443518,
+      "score": -86.14794654636187
+    }
+  },
+  {
+    "candidate_id": "cand_5dcde12bbabd",
+    "generation": 2,
+    "index": 7,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_5dcde12bbabd",
+    "individual": {
+      "survival_weight": 0.4409586284754778,
+      "distance_weight": 1.3685701099310357,
+      "tag_penalty": 144.54646113279534,
+      "fall_penalty": 26.30059313355078,
+      "oni_speed": 0.019412897376645533,
+      "learning_rate": 0.0004775093445985413,
+      "gamma": 0.9606044516978546,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 2048,
+      "batch_size": 64,
+      "n_epochs": 10,
+      "net_arch": [
+        128,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 16.294961469565763,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 1.1393336071477285,
+      "danger_wall_penalty_weight": 5.53000511885829,
+      "escape_bonus": 159.88408863409825,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8713607747360557,
+        "min_distance": 1.8713607747360557,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6694643242171696,
+        "min_distance": 1.6694643242171696,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8622533798750607,
+        "min_distance": 1.8622533798750607,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.8010261596094288,
+      "min_distance": 1.6694643242171696,
+      "score": -86.14794768078114
+    }
+  },
+  {
+    "candidate_id": "cand_5c0626b77957",
+    "generation": 2,
+    "index": 4,
+    "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_5c0626b77957",
+    "individual": {
+      "survival_weight": 0.4409586284754778,
+      "distance_weight": 1.7776135157086788,
+      "tag_penalty": 115.19964162986868,
+      "fall_penalty": 26.30059313355078,
+      "oni_speed": 0.026864461177477233,
+      "learning_rate": 0.0004775093445985413,
+      "gamma": 0.9677748758282154,
+      "gae_lambda": 0.9001977421836242,
+      "ent_coef": 0.01452668826115535,
+      "n_steps": 1024,
+      "batch_size": 64,
+      "n_epochs": 10,
+      "net_arch": [
+        256,
+        128
+      ],
+      "flee_timesteps": 2000,
+      "flee_num_envs": 1,
+      "distance_delta_weight": 16.294961469565763,
+      "distance_closing_penalty": 6.095815965387,
+      "wall_penalty_weight": 1.1393336071477285,
+      "danger_wall_penalty_weight": 5.53000511885829,
+      "escape_bonus": 51.07768508784057,
+      "action_change_weight": 0.07371347155708911,
+      "lateral_action_weight": 0.07258178850966372,
+      "yaw_action_weight": 0.001056300682798268,
+      "stall_penalty_weight": 0.008991282866414724
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8192008330668472,
+        "min_distance": 1.8192008330668472,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.6173024987895552,
+        "min_distance": 1.6173024987895552,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 0.2,
+        "mean_distance": 1.8100956844812583,
+        "min_distance": 1.8100956844812583,
+        "escaped": false,
+        "tagged": false,
+        "fell": true
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 0.20000000000000004,
+      "worst_survived_seconds": 0.2,
+      "escaped_count": 0,
+      "tagged_count": 0,
+      "fell_count": 3,
+      "mean_distance": 1.7488663387792203,
+      "min_distance": 1.6173024987895552,
+      "score": -86.25226732244157
+    }
+  }
+]

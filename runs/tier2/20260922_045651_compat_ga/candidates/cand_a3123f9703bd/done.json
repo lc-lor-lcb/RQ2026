@@ -1,0 +1,74 @@
+{
+  "candidate_id": "cand_a3123f9703bd",
+  "generation": 3,
+  "index": 7,
+  "candidate_dir": "runs\\tier2\\20260922_045651_compat_ga\\candidates\\cand_a3123f9703bd",
+  "individual": {
+    "survival_weight": 0.4409586284754778,
+    "distance_weight": 3.1317793139256267,
+    "tag_penalty": 39.88998486452779,
+    "fall_penalty": 26.30059313355078,
+    "oni_speed": 0.02884811065435275,
+    "learning_rate": 0.00010769454439855297,
+    "gamma": 0.9677748758282154,
+    "gae_lambda": 0.9001977421836242,
+    "ent_coef": 0.01452668826115535,
+    "n_steps": 2048,
+    "batch_size": 64,
+    "n_epochs": 10,
+    "net_arch": [
+      128,
+      128
+    ],
+    "flee_timesteps": 2000,
+    "flee_num_envs": 1,
+    "distance_delta_weight": 12.326287276987946,
+    "distance_closing_penalty": 6.095815965387,
+    "wall_penalty_weight": 1.1393336071477285,
+    "danger_wall_penalty_weight": 5.53000511885829,
+    "escape_bonus": 51.07768508784057,
+    "action_change_weight": 0.07371347155708911,
+    "lateral_action_weight": 0.11020794674920369,
+    "yaw_action_weight": 0.001056300682798268,
+    "stall_penalty_weight": 0.008991282866414724
+  },
+  "eval_results": [
+    {
+      "seed": 100,
+      "survived_seconds": 0.2,
+      "mean_distance": 1.8053142732342053,
+      "min_distance": 1.8053142732342053,
+      "escaped": false,
+      "tagged": false,
+      "fell": true
+    },
+    {
+      "seed": 101,
+      "survived_seconds": 0.2,
+      "mean_distance": 1.6034169792529749,
+      "min_distance": 1.6034169792529749,
+      "escaped": false,
+      "tagged": false,
+      "fell": true
+    },
+    {
+      "seed": 102,
+      "survived_seconds": 0.2,
+      "mean_distance": 1.7962071365787728,
+      "min_distance": 1.7962071365787728,
+      "escaped": false,
+      "tagged": false,
+      "fell": true
+    }
+  ],
+  "summary": {
+    "mean_survived_seconds": 0.20000000000000004,
+    "worst_survived_seconds": 0.2,
+    "escaped_count": 0,
+    "tagged_count": 0,
+    "fell_count": 3,
+    "mean_distance": 1.7349794630219844,
+    "min_distance": 1.6034169792529749,
+    "score": -86.28004107395603
+  }
+}

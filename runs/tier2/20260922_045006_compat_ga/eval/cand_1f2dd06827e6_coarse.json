@@ -1,0 +1,47 @@
+{
+  "candidate_dir": "runs\\tier2\\20260922_045006_compat_ga\\candidates\\cand_1f2dd06827e6",
+  "seeds": [
+    100,
+    101,
+    102
+  ],
+  "results": [
+    {
+      "seed": 100,
+      "survived_seconds": 0.2,
+      "mean_distance": 1.8387061537858995,
+      "min_distance": 1.8387061537858995,
+      "escaped": false,
+      "tagged": false,
+      "fell": true
+    },
+    {
+      "seed": 101,
+      "survived_seconds": 0.2,
+      "mean_distance": 1.6368072275888335,
+      "min_distance": 1.6368072275888335,
+      "escaped": false,
+      "tagged": false,
+      "fell": true
+    },
+    {
+      "seed": 102,
+      "survived_seconds": 0.2,
+      "mean_distance": 1.8295962174386022,
+      "min_distance": 1.8295962174386022,
+      "escaped": false,
+      "tagged": false,
+      "fell": true
+    }
+  ],
+  "summary": {
+    "mean_survived_seconds": 0.20000000000000004,
+    "worst_survived_seconds": 0.2,
+    "escaped_count": 0,
+    "tagged_count": 0,
+    "fell_count": 3,
+    "mean_distance": 1.7683698662711116,
+    "min_distance": 1.6368072275888335,
+    "score": -86.21326026745778
+  }
+}

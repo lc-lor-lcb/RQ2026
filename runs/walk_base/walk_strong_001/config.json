@@ -1,0 +1,20 @@
+{
+  "profile": "strong",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "eval_seeds": [
+    100,
+    101,
+    102,
+    200,
+    201
+  ],
+  "sample_steps": 45000,
+  "updates": 6000,
+  "ppo_steps": 50000,
+  "num_envs": 4,
+  "seconds": 20
+}

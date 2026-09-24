@@ -1,0 +1,14 @@
+{
+  "profile": "smoke",
+  "seeds": [
+    0
+  ],
+  "eval_seeds": [
+    100
+  ],
+  "sample_steps": 6000,
+  "updates": 800,
+  "ppo_steps": 2048,
+  "num_envs": 4,
+  "seconds": 6
+}

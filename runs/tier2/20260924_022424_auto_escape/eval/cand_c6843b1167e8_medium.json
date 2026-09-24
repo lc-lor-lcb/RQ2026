@@ -1,0 +1,117 @@
+{
+  "candidate_dir": "runs\\tier2\\20260924_022424_auto_escape\\candidates\\cand_c6843b1167e8",
+  "seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109
+  ],
+  "results": [
+    {
+      "seed": 100,
+      "survived_seconds": 1.2,
+      "mean_distance": 1.1987850463751706,
+      "min_distance": 0.6468068034690939,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 101,
+      "survived_seconds": 1.0,
+      "mean_distance": 1.0532722912394694,
+      "min_distance": 0.6341446156431809,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 102,
+      "survived_seconds": 1.2,
+      "mean_distance": 1.1271213312288884,
+      "min_distance": 0.6306245887480919,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 103,
+      "survived_seconds": 2.8,
+      "mean_distance": 0.9363647121145083,
+      "min_distance": 0.646012383350233,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 104,
+      "survived_seconds": 1.4,
+      "mean_distance": 1.1637573543388964,
+      "min_distance": 0.6421382033565542,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 105,
+      "survived_seconds": 3.8,
+      "mean_distance": 1.2640297545008525,
+      "min_distance": 0.6380132541166132,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 106,
+      "survived_seconds": 0.8,
+      "mean_distance": 0.9182381554518803,
+      "min_distance": 0.6400446213103221,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 107,
+      "survived_seconds": 3.4,
+      "mean_distance": 1.1014494778728652,
+      "min_distance": 0.6470137910225923,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 108,
+      "survived_seconds": 1.2,
+      "mean_distance": 1.1927632866730618,
+      "min_distance": 0.641090818592142,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    },
+    {
+      "seed": 109,
+      "survived_seconds": 3.2,
+      "mean_distance": 1.2274816982537788,
+      "min_distance": 0.6467746522798982,
+      "escaped": false,
+      "tagged": true,
+      "fell": false
+    }
+  ],
+  "summary": {
+    "mean_survived_seconds": 2.0,
+    "worst_survived_seconds": 0.8,
+    "escaped_count": 0,
+    "tagged_count": 10,
+    "fell_count": 0,
+    "mean_distance": 1.1183263108049373,
+    "min_distance": 0.6306245887480919,
+    "score": -115.56334737839012
+  }
+}

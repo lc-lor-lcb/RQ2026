@@ -1,0 +1,85 @@
+[
+  {
+    "candidate_id": "cand_c6843b1167e8",
+    "generation": 0,
+    "index": 0,
+    "candidate_dir": "runs\\tier2\\20260924_022424_auto_escape\\candidates\\cand_c6843b1167e8",
+    "individual": {
+      "survival_weight": 1.0,
+      "distance_weight": 2.0,
+      "tag_penalty": 120.0,
+      "fall_penalty": 120.0,
+      "oni_speed": 0.025,
+      "learning_rate": 0.0001,
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "ent_coef": 0.001,
+      "n_steps": 256,
+      "batch_size": 64,
+      "n_epochs": 2,
+      "net_arch": [
+        64,
+        64
+      ],
+      "flee_timesteps": 5000,
+      "flee_num_envs": 1
+    },
+    "eval_results": [
+      {
+        "seed": 100,
+        "survived_seconds": 1.2,
+        "mean_distance": 1.1987850463751706,
+        "min_distance": 0.6468068034690939,
+        "escaped": false,
+        "tagged": true,
+        "fell": false
+      },
+      {
+        "seed": 101,
+        "survived_seconds": 1.0,
+        "mean_distance": 1.0532722912394694,
+        "min_distance": 0.6341446156431809,
+        "escaped": false,
+        "tagged": true,
+        "fell": false
+      },
+      {
+        "seed": 102,
+        "survived_seconds": 1.2,
+        "mean_distance": 1.1271213312288884,
+        "min_distance": 0.6306245887480919,
+        "escaped": false,
+        "tagged": true,
+        "fell": false
+      },
+      {
+        "seed": 103,
+        "survived_seconds": 2.8,
+        "mean_distance": 0.9363647121145083,
+        "min_distance": 0.646012383350233,
+        "escaped": false,
+        "tagged": true,
+        "fell": false
+      },
+      {
+        "seed": 104,
+        "survived_seconds": 1.4,
+        "mean_distance": 1.1637573543388964,
+        "min_distance": 0.6421382033565542,
+        "escaped": false,
+        "tagged": true,
+        "fell": false
+      }
+    ],
+    "summary": {
+      "mean_survived_seconds": 1.52,
+      "worst_survived_seconds": 1.0,
+      "escaped_count": 0,
+      "tagged_count": 5,
+      "fell_count": 0,
+      "mean_distance": 1.0958601470593865,
+      "min_distance": 0.6306245887480919,
+      "score": -56.03827970588123
+    }
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "source_sha256": "3e7196c0e4e9fb8fb614819b04b59db12e5a916aca6175d1988f50e3769dd9e3",
+  "source_total_steps": 1520048,
+  "recipe": "scripts.refine_walk_posture.refine_posture",
+  "selected_total_steps": 3326960,
+  "stages": [
+    {
+      "name": "raise_body",
+      "steps": 300000,
+      "selected_total": 1820048
+    },
+    {
+      "name": "stop_and_forward",
+      "steps": 500000,
+      "selected_total": 2320048
+    },
+    {
+      "name": "reduce_tilt",
+      "requested_steps": 300000,
+      "actual_steps": 303104,
+      "selected_total": 2623152
+    },
+    {
+      "name": "practice_start",
+      "steps": 200000,
+      "selected_total": 2823152
+    },
+    {
+      "name": "track_speed",
+      "requested_steps": 500000,
+      "actual_steps": 503808,
+      "selected_total": 3326960
+    }
+  ]
+}

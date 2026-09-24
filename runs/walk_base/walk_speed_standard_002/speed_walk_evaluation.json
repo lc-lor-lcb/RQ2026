@@ -1,0 +1,342 @@
+{
+  "walk_summary": {
+    "passed": true,
+    "fall_count": 0,
+    "tagged_count": 0,
+    "mean_survived_seconds": 12.0,
+    "min_survived_seconds": 12.0,
+    "min_height": 0.2691906979030609,
+    "mean_vx": 0.572204166194884,
+    "per_command_mean_vx": {
+      "forward_0.4": 0.4751212416391981,
+      "forward_0.6": 0.6880553690415421,
+      "forward_0.8": 0.8025139260429448,
+      "forward_1.0": 0.8998913111778792,
+      "stand": -0.004561016927144262
+    },
+    "per_command_velocity_rmse": {
+      "forward_0.4": 0.21904262812124128,
+      "forward_0.6": 0.23143146558099295,
+      "forward_0.8": 0.27657026294943426,
+      "forward_1.0": 0.2891815898700422,
+      "stand": 0.02507808294754316
+    },
+    "high_speed_mean_vx": 0.851202618610412
+  },
+  "tag_summary": {
+    "passed": false,
+    "fall_count": 6,
+    "tagged_count": 0,
+    "mean_survived_seconds": 10.853333333333333,
+    "min_survived_seconds": 7.0,
+    "min_height": 0.13979076030647586,
+    "mean_vx": null,
+    "per_command_mean_vx": {},
+    "per_command_velocity_rmse": {},
+    "high_speed_mean_vx": null
+  },
+  "walk_rows": [
+    {
+      "command": "stand",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.3092880070051071,
+      "min_height": 0.27402562745395836,
+      "mean_vx": -0.004693612503157078,
+      "mean_vy": 0.0006847801480497809,
+      "mean_omega": 0.002099575188372093,
+      "velocity_rmse": 0.023248624274331203
+    },
+    {
+      "command": "stand",
+      "seed": 101,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.30883189697818314,
+      "min_height": 0.273530418440802,
+      "mean_vx": -0.004410336077531777,
+      "mean_vy": 0.0010523914805902433,
+      "mean_omega": 0.0039557654396254645,
+      "velocity_rmse": 0.027305619711700327
+    },
+    {
+      "command": "stand",
+      "seed": 102,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.30852909566106945,
+      "min_height": 0.274098020406132,
+      "mean_vx": -0.004579102200743929,
+      "mean_vy": 0.0004489863391741365,
+      "mean_omega": 0.0028946344812066606,
+      "velocity_rmse": 0.02468000485659795
+    },
+    {
+      "command": "forward_0.4",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.29012556590968797,
+      "min_height": 0.276547508286986,
+      "mean_vx": 0.47399020983354956,
+      "mean_vy": 0.007361788459731766,
+      "mean_omega": 0.01489164226571012,
+      "velocity_rmse": 0.2193823008461295
+    },
+    {
+      "command": "forward_0.4",
+      "seed": 101,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.2901381002206999,
+      "min_height": 0.2762944971077683,
+      "mean_vx": 0.4741082173035242,
+      "mean_vy": 0.00733460713836318,
+      "mean_omega": 0.014589584550473284,
+      "velocity_rmse": 0.21966879624451435
+    },
+    {
+      "command": "forward_0.4",
+      "seed": 102,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.2901169713027205,
+      "min_height": 0.27533657779919246,
+      "mean_vx": 0.4772652977805205,
+      "mean_vy": 0.005504775736288003,
+      "mean_omega": 0.01019322030381494,
+      "velocity_rmse": 0.21807678727308
+    },
+    {
+      "command": "forward_0.6",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.2940499627774386,
+      "min_height": 0.27776263110467975,
+      "mean_vx": 0.6844573655015886,
+      "mean_vy": 0.004309311086168552,
+      "mean_omega": 0.016228529548389155,
+      "velocity_rmse": 0.2350251653838382
+    },
+    {
+      "command": "forward_0.6",
+      "seed": 101,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.29413793091577506,
+      "min_height": 0.2777283225432725,
+      "mean_vx": 0.6880191007539105,
+      "mean_vy": 0.0035756057710517554,
+      "mean_omega": 0.012720662564074513,
+      "velocity_rmse": 0.23306840425992634
+    },
+    {
+      "command": "forward_0.6",
+      "seed": 102,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.29418374137516734,
+      "min_height": 0.27784385594770405,
+      "mean_vx": 0.691689640869127,
+      "mean_vy": 0.0028137110134620977,
+      "mean_omega": 0.022339419223574505,
+      "velocity_rmse": 0.22620082709921432
+    },
+    {
+      "command": "forward_0.8",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.300097270713531,
+      "min_height": 0.2741890059722807,
+      "mean_vx": 0.8010050812862556,
+      "mean_vy": 0.00401150178434419,
+      "mean_omega": 0.010715658286658653,
+      "velocity_rmse": 0.2793600941799136
+    },
+    {
+      "command": "forward_0.8",
+      "seed": 101,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.30027776637425285,
+      "min_height": 0.2729745498004751,
+      "mean_vx": 0.8023183121271114,
+      "mean_vy": 0.0020276090402547567,
+      "mean_omega": 0.018048980048563514,
+      "velocity_rmse": 0.27575482015860386
+    },
+    {
+      "command": "forward_0.8",
+      "seed": 102,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.3007272416883613,
+      "min_height": 0.2691906979030609,
+      "mean_vx": 0.8042183847154674,
+      "mean_vy": 0.007419067130460938,
+      "mean_omega": -0.0065161252039264836,
+      "velocity_rmse": 0.27459587450978534
+    },
+    {
+      "command": "forward_1.0",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.30880651635233863,
+      "min_height": 0.2757104760426874,
+      "mean_vx": 0.9035705279811262,
+      "mean_vy": 0.028319061804063173,
+      "mean_omega": -0.08042846811631774,
+      "velocity_rmse": 0.2850261926011722
+    },
+    {
+      "command": "forward_1.0",
+      "seed": 101,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.3087311758158902,
+      "min_height": 0.27405972419976965,
+      "mean_vx": 0.9063583375652468,
+      "mean_vy": 0.02915341767405809,
+      "mean_omega": -0.07550831730878473,
+      "velocity_rmse": 0.28177156723168506
+    },
+    {
+      "command": "forward_1.0",
+      "seed": 102,
+      "fell": false,
+      "survived_seconds": 12.0,
+      "mean_height": 0.30885327281470687,
+      "min_height": 0.271479406998851,
+      "mean_vx": 0.8897450679872649,
+      "mean_vy": 0.029479819195469006,
+      "mean_omega": -0.08625335579802447,
+      "velocity_rmse": 0.3007470097772694
+    }
+  ],
+  "tag_rows": [
+    {
+      "command": "stand",
+      "seed": 100,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.3096961065890796
+    },
+    {
+      "command": "stand",
+      "seed": 101,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.30918808953471694
+    },
+    {
+      "command": "stand",
+      "seed": 102,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.3089386936150968
+    },
+    {
+      "command": "forward_0.4",
+      "seed": 100,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.27432157647727173
+    },
+    {
+      "command": "forward_0.4",
+      "seed": 101,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.2716692256225663
+    },
+    {
+      "command": "forward_0.4",
+      "seed": 102,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.26793240507549254
+    },
+    {
+      "command": "forward_0.6",
+      "seed": 100,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.28803718350411756
+    },
+    {
+      "command": "forward_0.6",
+      "seed": 101,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.2883579902180415
+    },
+    {
+      "command": "forward_0.6",
+      "seed": 102,
+      "fell": false,
+      "tagged": false,
+      "survived_seconds": 12.0,
+      "min_height": 0.29744620184522613
+    },
+    {
+      "command": "forward_0.8",
+      "seed": 100,
+      "fell": true,
+      "tagged": false,
+      "survived_seconds": 7.8,
+      "min_height": 0.13979076030647586
+    },
+    {
+      "command": "forward_0.8",
+      "seed": 101,
+      "fell": true,
+      "tagged": false,
+      "survived_seconds": 11.4,
+      "min_height": 0.14422058549676
+    },
+    {
+      "command": "forward_0.8",
+      "seed": 102,
+      "fell": true,
+      "tagged": false,
+      "survived_seconds": 7.0,
+      "min_height": 0.14714173622272475
+    },
+    {
+      "command": "forward_1.0",
+      "seed": 100,
+      "fell": true,
+      "tagged": false,
+      "survived_seconds": 10.8,
+      "min_height": 0.1406793172753029
+    },
+    {
+      "command": "forward_1.0",
+      "seed": 101,
+      "fell": true,
+      "tagged": false,
+      "survived_seconds": 10.4,
+      "min_height": 0.14180656341596015
+    },
+    {
+      "command": "forward_1.0",
+      "seed": 102,
+      "fell": true,
+      "tagged": false,
+      "survived_seconds": 7.4,
+      "min_height": 0.14930055563942635
+    }
+  ]
+}

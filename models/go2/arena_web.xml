@@ -1,0 +1,70 @@
+<!-- Web viewer arena: uses go2.xml (with OBJ visual meshes) for mjswan. -->
+<mujoco model="go2_arena_web">
+  <include file="go2_posctrl.xml"/>
+
+  <statistic center="0 0 0.3" extent="4"/>
+
+  <!-- walk_web.xml と同じ照明設定。これが無いとブラウザで壁の内側が
+       真っ暗になり、ロボットも鬼もほとんど見えない。 -->
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.4 0.4 0.4" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="-120" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient"
+      rgb1="0.4 0.6 0.8" rgb2="0.1 0.2 0.3" width="512" height="3072"/>
+    <texture type="2d" name="floor_tex" builtin="checker"
+      rgb1="0.55 0.55 0.55" rgb2="0.45 0.45 0.45" width="200" height="200"/>
+    <material name="floor_mat" texture="floor_tex" texrepeat="5 5" reflectance="0.1"/>
+    <material name="wall_mat" rgba="0.75 0.78 0.82 1"/>
+    <material name="oni_mat" rgba="0.95 0.12 0.12 1"/>
+  </asset>
+
+  <worldbody>
+    <light name="sun" pos="0 0 4" dir="0 0 -1" directional="true"
+      diffuse="0.8 0.8 0.8" specular="0 0 0"/>
+
+    <!-- 5m×5m フロア -->
+    <geom name="floor" type="plane" size="2.5 2.5 0.1" material="floor_mat"
+      contype="1" conaffinity="1" friction="0.8 0.1 0.1"/>
+
+    <!-- 北壁 y=+2.5 -->
+    <geom name="wall_n" type="box" material="wall_mat" pos="0  2.55 0.5" size="2.6 0.05 0.5"
+      contype="1" conaffinity="1"/>
+    <!-- 南壁 y=-2.5 -->
+    <geom name="wall_s" type="box" material="wall_mat" pos="0 -2.55 0.5" size="2.6 0.05 0.5"
+      contype="1" conaffinity="1"/>
+    <!-- 東壁 x=+2.5 -->
+    <geom name="wall_e" type="box" material="wall_mat" pos=" 2.55 0 0.5" size="0.05 2.6 0.5"
+      contype="1" conaffinity="1"/>
+    <!-- 西壁 x=-2.5 -->
+    <geom name="wall_w" type="box" material="wall_mat" pos="-2.55 0 0.5" size="0.05 2.6 0.5"
+      contype="1" conaffinity="1"/>
+
+    <!-- 鬼（赤い球）: slide 関節で移動
+         qpos[19]=oni_x, qpos[20]=oni_y -->
+    <body name="oni" pos="0 0 0.3">
+      <joint name="oni_x" type="slide" axis="1 0 0"
+        limited="true" range="-2.4 2.4" damping="100" frictionloss="0"/>
+      <joint name="oni_y" type="slide" axis="0 1 0"
+        limited="true" range="-2.4 2.4" damping="100" frictionloss="0"/>
+      <geom name="oni_body" type="sphere" size="0.28" material="oni_mat"
+        contype="0" conaffinity="0" mass="0.001"/>
+      <!-- 鬼の方向インジケーター（目のような突起） -->
+      <geom name="oni_eye" type="sphere" size="0.08" pos="0.25 0 0.1"
+        rgba="1 1 1 1" contype="0" conaffinity="0" mass="0"/>
+    </body>
+  </worldbody>
+
+  <!-- Keyframe: robot home pose + 鬼の初期位置（go2.xml の "home" に oni 座標を追加）。
+       鬼を原点に置くとロボットと重なって表示されるため、学習側
+       Go2TagHierarchicalEnv.reset と同じく 1.5m 以上離した位置に置く。
+       qpos[19]=oni_x=1.6, qpos[20]=oni_y=1.6（原点から約 2.26m）。 -->
+  <keyframe>
+    <key name="arena_home"
+      qpos="0 0 0.27 1 0 0 0 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 1.6 1.6"
+      ctrl="0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8" />
+  </keyframe>
+</mujoco>

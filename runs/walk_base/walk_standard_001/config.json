@@ -1,0 +1,17 @@
+{
+  "profile": "standard",
+  "seeds": [
+    0,
+    1
+  ],
+  "eval_seeds": [
+    100,
+    101,
+    102
+  ],
+  "sample_steps": 30000,
+  "updates": 4000,
+  "ppo_steps": 12288,
+  "num_envs": 4,
+  "seconds": 12
+}

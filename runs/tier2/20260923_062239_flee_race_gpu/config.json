@@ -1,0 +1,233 @@
+{
+  "walk_source_dir": "runs/walk_base/walk_speed_race_001/best",
+  "output_dir": "runs/tier2",
+  "experiment_name": "flee_race_gpu",
+  "seed": 42,
+  "population_size": 6,
+  "generations": 3,
+  "elite_count": 2,
+  "mutation_rate": 0.28,
+  "crossover_rate": 0.65,
+  "vec_env_cls": "subproc",
+  "high_level_command_mode": "safe_forward",
+  "high_level_observation_mode": "body_relative",
+  "high_level_command_ranges": {
+    "vx": [
+      0.75,
+      1.55
+    ],
+    "vy": [
+      -0.02,
+      0.02
+    ],
+    "omega": [
+      -0.95,
+      0.95
+    ]
+  },
+  "initial_distance_range": [
+    1.0,
+    2.35
+  ],
+  "max_episode_seconds": 30.0,
+  "coarse_eval_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104
+  ],
+  "medium_eval_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109
+  ],
+  "final_eval_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129
+  ],
+  "default_training": {
+    "timesteps": 200000,
+    "n_envs": 8,
+    "device": "auto",
+    "checkpoint_steps": 50000
+  },
+  "search_space": {
+    "survival_weight": [
+      "uniform",
+      0.8,
+      3.0
+    ],
+    "distance_weight": [
+      "uniform",
+      1.0,
+      8.0
+    ],
+    "tag_penalty": [
+      "uniform",
+      120.0,
+      300.0
+    ],
+    "fall_penalty": [
+      "uniform",
+      120.0,
+      300.0
+    ],
+    "oni_speed": [
+      "uniform",
+      0.024,
+      0.034
+    ],
+    "learning_rate": [
+      "loguniform",
+      3e-05,
+      0.0002
+    ],
+    "gamma": [
+      "uniform",
+      0.985,
+      0.999
+    ],
+    "gae_lambda": [
+      "uniform",
+      0.92,
+      0.99
+    ],
+    "ent_coef": [
+      "loguniform",
+      0.0008,
+      0.03
+    ],
+    "n_steps": [
+      "choice",
+      [
+        1024,
+        2048
+      ]
+    ],
+    "batch_size": [
+      "choice",
+      [
+        256,
+        512
+      ]
+    ],
+    "n_epochs": [
+      "choice",
+      [
+        5,
+        8,
+        10
+      ]
+    ],
+    "net_arch": [
+      "choice",
+      [
+        [
+          256,
+          256
+        ],
+        [
+          384,
+          256
+        ],
+        [
+          512,
+          256
+        ]
+      ]
+    ],
+    "flee_timesteps": [
+      "choice",
+      [
+        200000
+      ]
+    ],
+    "flee_num_envs": [
+      "choice",
+      [
+        8
+      ]
+    ],
+    "distance_delta_weight": [
+      "uniform",
+      10.0,
+      35.0
+    ],
+    "distance_closing_penalty": [
+      "uniform",
+      18.0,
+      50.0
+    ],
+    "wall_penalty_weight": [
+      "uniform",
+      2.0,
+      12.0
+    ],
+    "danger_wall_penalty_weight": [
+      "uniform",
+      6.0,
+      28.0
+    ],
+    "escape_bonus": [
+      "uniform",
+      150.0,
+      420.0
+    ],
+    "action_change_weight": [
+      "uniform",
+      0.005,
+      0.06
+    ],
+    "lateral_action_weight": [
+      "uniform",
+      0.0,
+      0.06
+    ],
+    "yaw_action_weight": [
+      "uniform",
+      0.0,
+      0.04
+    ],
+    "stall_penalty_weight": [
+      "uniform",
+      0.05,
+      0.2
+    ]
+  }
+}

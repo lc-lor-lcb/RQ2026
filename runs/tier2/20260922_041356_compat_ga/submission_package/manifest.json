@@ -1,0 +1,12 @@
+{
+  "candidate_dir": "runs\\tier2\\20260922_041356_compat_ga\\candidates\\cand_1f2dd06827e6",
+  "files": [
+    "walk_model.zip",
+    "walk_model_vecnorm.pkl",
+    "walk_params.json",
+    "flee_model.zip",
+    "flee_model_vecnorm.pkl",
+    "flee_params.json"
+  ],
+  "missing": []
+}

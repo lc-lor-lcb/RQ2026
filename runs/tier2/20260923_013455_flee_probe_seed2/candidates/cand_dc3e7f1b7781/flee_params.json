@@ -1,0 +1,58 @@
+{
+  "kind": "flee",
+  "reward_config": {
+    "survival_weight": 2.1635189437572326,
+    "distance_weight": 1.918970264682217,
+    "tag_penalty": 144.8720439692769,
+    "fall_penalty": 232.4057775228082
+  },
+  "timesteps": 50000,
+  "num_envs": 2,
+  "ppo_kwargs": {
+    "learning_rate": 0.00017379591667232753,
+    "n_steps": 1024,
+    "batch_size": 128,
+    "n_epochs": 5,
+    "gamma": 0.9763046273295563,
+    "gae_lambda": 0.9600610355643078,
+    "ent_coef": 0.0015428208650432138,
+    "policy_kwargs": {
+      "net_arch": [
+        128,
+        128
+      ]
+    },
+    "device": "cpu"
+  },
+  "seed": 23,
+  "oni_speed": 0.026364182450458906,
+  "total_timesteps": 50000,
+  "elapsed_seconds": 1056.5469999999914,
+  "tier2_candidate_id": "cand_dc3e7f1b7781",
+  "strategic_reward": {
+    "stall_penalty_weight": 0.09007791475367054,
+    "escape_bonus": 186.1830509237302,
+    "distance_closing_penalty": 17.568537276584856,
+    "lateral_action_weight": 0.047216070821501574,
+    "wall_penalty_weight": 7.693360318511364,
+    "danger_wall_penalty_weight": 11.37382593461951,
+    "distance_delta_weight": 8.658929359930463,
+    "yaw_action_weight": 0.041050417129182934,
+    "action_change_weight": 0.06513403111621822
+  },
+  "high_level_command_mode": "safe_forward",
+  "high_level_command_ranges": {
+    "vx": [
+      0.25,
+      0.55
+    ],
+    "vy": [
+      -0.04,
+      0.04
+    ],
+    "omega": [
+      -0.28,
+      0.28
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+[
+  {
+    "candidate": "runs\\walk_base\\walk_strong_001\\candidates\\walk_seed1",
+    "seed": 1,
+    "score": 62.750741578022584,
+    "passed": true,
+    "walk_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "tagged_count": 0,
+      "mean_survived_seconds": 20.0,
+      "min_survived_seconds": 20.0,
+      "min_height": 0.27507415780225875
+    },
+    "tag_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "tagged_count": 0,
+      "mean_survived_seconds": 20.0,
+      "min_survived_seconds": 20.0,
+      "min_height": 0.27163728756105077
+    },
+    "video": "runs\\walk_base\\walk_strong_001\\videos\\walk_seed1_forward.mp4"
+  },
+  {
+    "candidate": "runs\\walk_base\\walk_strong_001\\candidates\\walk_seed0",
+    "seed": 0,
+    "score": 62.748144611954174,
+    "passed": true,
+    "walk_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "tagged_count": 0,
+      "mean_survived_seconds": 20.0,
+      "min_survived_seconds": 20.0,
+      "min_height": 0.27481446119541736
+    },
+    "tag_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "tagged_count": 0,
+      "mean_survived_seconds": 20.0,
+      "min_survived_seconds": 20.0,
+      "min_height": 0.2564457640421716
+    },
+    "video": "runs\\walk_base\\walk_strong_001\\videos\\walk_seed0_forward.mp4"
+  },
+  {
+    "candidate": "runs\\walk_base\\walk_strong_001\\candidates\\walk_seed2",
+    "seed": 2,
+    "score": 62.747664466926366,
+    "passed": true,
+    "walk_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "tagged_count": 0,
+      "mean_survived_seconds": 20.0,
+      "min_survived_seconds": 20.0,
+      "min_height": 0.27476644669263695
+    },
+    "tag_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "tagged_count": 0,
+      "mean_survived_seconds": 20.0,
+      "min_survived_seconds": 20.0,
+      "min_height": 0.27346826680512704
+    },
+    "video": "runs\\walk_base\\walk_strong_001\\videos\\walk_seed2_forward.mp4"
+  }
+]

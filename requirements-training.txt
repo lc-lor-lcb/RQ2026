@@ -1,0 +1,19 @@
+# Numerical stack used by the local/Colab walking experiment (Python 3.12).
+# Include as constraints with: pip install -r requirements.txt -c requirements-training.txt
+mujoco==3.8.1
+gymnasium==1.3.0
+stable-baselines3==2.9.0
+torch==2.14.0
+numpy==2.5.3
+onnx==1.22.0
+onnxruntime==1.30.0
+mjswan==0.8.2
+
+# Notebook/recording packages tested with this NumPy build.
+matplotlib==3.11.2
+pandas==3.0.6
+mediapy==1.2.7
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+tqdm==4.70.1
+rich==15.0.0

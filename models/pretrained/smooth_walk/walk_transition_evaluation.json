@@ -1,0 +1,176 @@
+{
+  "rows": [
+    {
+      "seed": 200,
+      "segment": 0,
+      "target_vx": 0.0,
+      "mean_velocity": [
+        8.960773708645026e-05,
+        5.50434780075817e-08,
+        -4.093997987370472e-05
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.1393389375362785,
+      "passed": true
+    },
+    {
+      "seed": 200,
+      "segment": 1,
+      "target_vx": 0.4,
+      "mean_velocity": [
+        0.4282801186446985,
+        -0.0006019278143838363,
+        -0.0008277569406446528
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07126873671268019,
+      "passed": true
+    },
+    {
+      "seed": 200,
+      "segment": 2,
+      "target_vx": 0.0,
+      "mean_velocity": [
+        -0.0002279768767475684,
+        -2.745296444354715e-06,
+        -0.0002984046209531896
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.10906228997015124,
+      "passed": true
+    },
+    {
+      "seed": 200,
+      "segment": 3,
+      "target_vx": 0.4,
+      "mean_velocity": [
+        0.4283600267608325,
+        -0.0008890915949766977,
+        -0.0011760667799757978
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07450221738685373,
+      "passed": true
+    },
+    {
+      "seed": 203,
+      "segment": 0,
+      "target_vx": 0.0,
+      "mean_velocity": [
+        1.6667205076113373e-05,
+        -1.074563899724339e-05,
+        -1.289547084231988e-05
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.1331246992597346,
+      "passed": true
+    },
+    {
+      "seed": 203,
+      "segment": 1,
+      "target_vx": 0.4,
+      "mean_velocity": [
+        0.4287324330515731,
+        -0.000775726773246397,
+        -0.0006663158979923286
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.06997077040854324,
+      "passed": true
+    },
+    {
+      "seed": 203,
+      "segment": 2,
+      "target_vx": 0.0,
+      "mean_velocity": [
+        -9.572927248728383e-05,
+        5.7185917752245336e-05,
+        -8.527938841609628e-05
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.08870591387296714,
+      "passed": true
+    },
+    {
+      "seed": 203,
+      "segment": 3,
+      "target_vx": 0.4,
+      "mean_velocity": [
+        0.42798946454284825,
+        -0.000521219440440241,
+        -0.0016628125051596433
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07396796086187682,
+      "passed": true
+    },
+    {
+      "seed": 209,
+      "segment": 0,
+      "target_vx": 0.0,
+      "mean_velocity": [
+        0.00020909603497107452,
+        1.544429691926407e-05,
+        4.3360241104327534e-05
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.14728140522262978,
+      "passed": true
+    },
+    {
+      "seed": 209,
+      "segment": 1,
+      "target_vx": 0.4,
+      "mean_velocity": [
+        0.4292029524723852,
+        -0.0007391504791392093,
+        -0.0006709517931710177
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07069703375742356,
+      "passed": true
+    },
+    {
+      "seed": 209,
+      "segment": 2,
+      "target_vx": 0.0,
+      "mean_velocity": [
+        -0.0001225872914266946,
+        7.492944446661285e-05,
+        -8.303084989862299e-05
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.08739694243287388,
+      "passed": true
+    },
+    {
+      "seed": 209,
+      "segment": 3,
+      "target_vx": 0.4,
+      "mean_velocity": [
+        0.42881726314331287,
+        -0.0008129000796722649,
+        -0.0002753378642449372
+      ],
+      "fell": false,
+      "nonfoot_contact_fraction": 0.0,
+      "min_hind_knee_height_m": 0.07286850726067706,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "segment_seconds": 20,
+  "warmup_seconds": 1,
+  "contact_measurement": "all control steps, including command transitions"
+}

@@ -1,0 +1,143 @@
+{
+  "walk_source_dir": "runs/walk_base/walk_sprint_turn_001/best",
+  "output_dir": "runs/tier2",
+  "experiment_name": "auto_escape",
+  "seed": 77,
+  "population_size": 1,
+  "generations": 1,
+  "elite_count": 1,
+  "mutation_rate": 0.0,
+  "crossover_rate": 0.0,
+  "vec_env_cls": "dummy",
+  "skip_policy_training": true,
+  "high_level_command_mode": "auto_escape",
+  "high_level_observation_mode": "body_relative",
+  "high_level_command_ranges": {
+    "vx": [
+      0.55,
+      1.5
+    ],
+    "vy": [
+      -0.12,
+      0.12
+    ],
+    "omega": [
+      -1.2,
+      1.2
+    ]
+  },
+  "initial_distance_range": [
+    1.0,
+    2.35
+  ],
+  "max_episode_seconds": 30.0,
+  "teacher_warmstart": {
+    "enabled": false
+  },
+  "coarse_eval_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104
+  ],
+  "default_training": {
+    "device": "auto",
+    "checkpoint_steps": 5000
+  },
+  "search_space": {
+    "survival_weight": [
+      "choice",
+      [
+        1.0
+      ]
+    ],
+    "distance_weight": [
+      "choice",
+      [
+        2.0
+      ]
+    ],
+    "tag_penalty": [
+      "choice",
+      [
+        120.0
+      ]
+    ],
+    "fall_penalty": [
+      "choice",
+      [
+        120.0
+      ]
+    ],
+    "oni_speed": [
+      "choice",
+      [
+        0.025
+      ]
+    ],
+    "learning_rate": [
+      "choice",
+      [
+        0.0001
+      ]
+    ],
+    "gamma": [
+      "choice",
+      [
+        0.99
+      ]
+    ],
+    "gae_lambda": [
+      "choice",
+      [
+        0.95
+      ]
+    ],
+    "ent_coef": [
+      "choice",
+      [
+        0.001
+      ]
+    ],
+    "n_steps": [
+      "choice",
+      [
+        256
+      ]
+    ],
+    "batch_size": [
+      "choice",
+      [
+        64
+      ]
+    ],
+    "n_epochs": [
+      "choice",
+      [
+        2
+      ]
+    ],
+    "net_arch": [
+      "choice",
+      [
+        [
+          64,
+          64
+        ]
+      ]
+    ],
+    "flee_timesteps": [
+      "choice",
+      [
+        5000
+      ]
+    ],
+    "flee_num_envs": [
+      "choice",
+      [
+        1
+      ]
+    ]
+  }
+}

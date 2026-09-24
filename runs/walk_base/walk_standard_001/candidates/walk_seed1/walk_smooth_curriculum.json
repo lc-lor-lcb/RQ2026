@@ -1,0 +1,14 @@
+{
+  "method": "inverse-kinematics examples then PPO",
+  "examples": {
+    "sample_steps": 30000,
+    "updates": 4000,
+    "mse": 4.706784966401756e-05
+  },
+  "requested_ppo_steps": 12288,
+  "seed": 1,
+  "freeze_normalization": true,
+  "command_transition_examples": true,
+  "actual_ppo_steps": 12288,
+  "recipe": "scripts.bootstrap_smooth_walk.train_smooth_walk"
+}

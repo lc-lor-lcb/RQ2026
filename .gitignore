@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# モデルファイル（学習済み・大容量）
+models/teams/
+*.zip
+*.pkl
+*.pt
+*.onnx
+tensorboard/
+checkpoints/
+eval_logs/
+best/
+
+# ノートブック出力
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# ログ
+*.log
+*.csv
+
+# Claude Code 設定（ローカル専用）
+.claude/
+
+# Web viewer — JS/WASM assets は scripts/setup_web_vendor.py でダウンロード
+webapp/dist/
+webapp/vendor/
+# エクスポート済みポリシー（チームごと）
+webapp/models/
+
+# 一時ファイル
+/tmp/
+
+# Local training runtime
+.venv/
+
+# Generated local training previews and transfer bundles
+/artifacts/
+
+# Verified walking policy distributed with the Colab notebooks
+!models/pretrained/smooth_walk/walk_model.zip
+!models/pretrained/smooth_walk/walk_model_vecnorm.pkl

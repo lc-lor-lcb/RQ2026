@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoboQuest 2026 Viewer</title>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/three.module.js",
+      "three/addons/": "./vendor/three/addons/"
+    }
+  }
+  </script>
+  <script src="./vendor/ort/ort.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; overflow: hidden; }
+    body {
+      background: #101115;
+      color: #e9edf4;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .app { display: grid; grid-template-rows: 42px 1fr; height: 100%; }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 14px;
+      background: #171a22;
+      border-bottom: 1px solid #2a3040;
+    }
+    h1 { margin: 0; font-size: 16px; color: #b8d4ff; }
+    .badge {
+      border: 1px solid #38527a;
+      background: #1d2b43;
+      color: #9dc1f3;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+    }
+    #header-status { margin-left: auto; color: #9aa5b5; font-size: 12px; }
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 260px; min-height: 0; }
+    #canvas-wrap {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      background: #0b0d11;
+    }
+    #canvas { display: block; width: 100%; height: 100%; }
+    #loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(12, 14, 20, 0.95);
+      z-index: 4;
+      text-align: center;
+      padding: 24px;
+    }
+    .spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid #2b3446;
+      border-top-color: #6aa4ff;
+      border-radius: 50%;
+      animation: spin 900ms linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading-title { color: #d5e4ff; font-size: 15px; }
+    #loading-detail { color: #8d99aa; font-size: 12px; max-width: 560px; line-height: 1.5; }
+    #result {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      min-width: 260px;
+      padding: 20px 24px;
+      background: rgba(14, 16, 24, 0.94);
+      border: 2px solid #6aa4ff;
+      border-radius: 8px;
+      text-align: center;
+      z-index: 3;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
+    }
+    #result.show { display: block; }
+    #result-title { font-size: 22px; font-weight: 700; }
+    #result-sub { margin-top: 5px; color: #a6b1c2; font-size: 13px; }
+    aside {
+      min-height: 0;
+      overflow-y: auto;
+      background: #151821;
+      border-left: 1px solid #2a3040;
+    }
+    section { padding: 12px; border-bottom: 1px solid #242a38; }
+    h2 {
+      margin: 0 0 9px;
+      color: #7fa6e8;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .stat { display: flex; justify-content: space-between; gap: 12px; margin: 5px 0; font-size: 13px; }
+    .stat span:first-child { color: #8994a6; }
+    .stat span:last-child { color: #d8e6ff; font-variant-numeric: tabular-nums; font-weight: 600; }
+    .progress { height: 6px; border-radius: 999px; background: #262d3b; overflow: hidden; margin: 6px 0 8px; }
+    #time-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #62a3ff, #6ce0c6); }
+    button {
+      border: 1px solid #3b4b65;
+      background: #202b3f;
+      color: #c6dcff;
+      border-radius: 6px;
+      min-height: 34px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+    }
+    button:hover { background: #273750; }
+    button.primary { background: #1f4f8f; border-color: #5a99ec; color: white; font-weight: 650; }
+    .row { display: flex; gap: 6px; }
+    .row > button { flex: 1; }
+    .dpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+    .dpad button { min-height: 34px; }
+    .dpad .wide { grid-column: span 3; }
+    label { display: block; color: #929bad; font-size: 12px; margin: 10px 0 3px; }
+    input[type=range] { width: 100%; accent-color: #6aa4ff; }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .pill { border: 1px solid #30394b; border-radius: 999px; padding: 3px 8px; color: #8994a6; font-size: 11px; }
+    .pill.ok { color: #8ce0ad; border-color: #356648; }
+    .pill.warn { color: #f2c97e; border-color: #735b29; }
+    .mode-switch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+    .mode-switch button.active { background: #29476d; border-color: #6399dd; color: white; }
+    .small { color: #818b9d; font-size: 12px; line-height: 1.45; }
+    @media (max-width: 760px) {
+      main { grid-template-columns: 1fr; grid-template-rows: minmax(360px, 1fr) 300px; }
+      aside { border-left: 0; border-top: 1px solid #2a3040; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>RoboQuest 2026</h1>
+    <span class="badge" id="mode-badge">browser MuJoCo</span>
+    <div id="header-status">loading</div>
+  </header>
+
+  <main>
+    <div id="canvas-wrap">
+      <canvas id="canvas"></canvas>
+      <div id="loading">
+        <div class="spinner"></div>
+        <div id="loading-title">ブラウザ版ビューアーを準備中</div>
+        <div id="loading-detail">MuJoCo WASM と ONNX Runtime Web を Colab から読み込んでいます。</div>
+      </div>
+      <div id="result">
+        <div id="result-title"></div>
+        <div id="result-sub"></div>
+      </div>
+    </div>
+
+    <aside>
+      <section>
+        <h2>Status</h2>
+        <div class="stat"><span>生存時間</span><span id="st-time">0.0 s</span></div>
+        <div class="progress"><div id="time-bar"></div></div>
+        <div class="stat"><span>鬼との距離</span><span id="st-dist">-- m</span></div>
+        <div class="stat"><span>高さ</span><span id="st-height">-- m</span></div>
+        <div class="stat"><span>状態</span><span id="st-state">停止中</span></div>
+      </section>
+
+      <section>
+        <h2>Simulation</h2>
+        <div class="row">
+          <button class="primary" id="play">開始</button>
+          <button id="reset">リセット</button>
+        </div>
+        <label>速度倍率 <span id="speed-label">1x</span></label>
+        <input id="speed" type="range" min="1" max="4" step="1" value="1">
+      </section>
+
+      <section>
+        <h2>Manual Control</h2>
+        <div class="dpad">
+          <div></div><button data-key="w">↑</button><div></div>
+          <button data-key="a">←</button><button data-key="stop">■</button><button data-key="d">→</button>
+          <div></div><button data-key="s">↓</button><div></div>
+          <button data-key="q">左移動</button><button data-key="space">停止</button><button data-key="e">右移動</button>
+        </div>
+        <label>コマンド強度 <span id="cmd-label">0.8</span></label>
+        <input id="cmd-strength" type="range" min="0.1" max="1.0" step="0.1" value="0.8">
+      </section>
+
+      <section>
+        <h2>View</h2>
+        <div class="mode-switch">
+          <button id="view-top" class="active">俯瞰</button>
+          <button id="view-side">斜め</button>
+          <button id="view-free">自由</button>
+        </div>
+      </section>
+
+      <section id="oni-section">
+        <h2>Oni</h2>
+        <label>鬼の速度 <span id="oni-label">0.025</span></label>
+        <input id="oni-speed" type="range" min="0.005" max="0.08" step="0.005" value="0.025">
+      </section>
+
+      <section>
+        <h2>Policies</h2>
+        <div class="pill-list">
+          <span class="pill warn" id="pill-walk">walk loading</span>
+          <span class="pill warn" id="pill-flee">flee loading</span>
+          <span class="pill warn" id="pill-mj">mujoco loading</span>
+        </div>
+        <p class="small" id="policy-note">
+          学習後にエクスポートされた ONNX があれば自動で読み込みます。
+        </p>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const MAX_TIME = 60.0;
+const TAG_DIST = 0.65;
+const ARENA_HALF = 2.35;
+const CTRL_HZ = 50;
+const CTRL_DT = 1 / CTRL_HZ;
+const SUBSTEPS = 5;
+const HIGH_LEVEL_INTERVAL = 10;
+const ACTION_SCALE = 0.3;
+const KP = 20.0;
+const KD = 0.5;
+const STANDING_POS = new Float64Array([
+  0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8,
+]);
+const HOME_QPOS = [
+  0, 0, 0.27, 1, 0, 0, 0,
+  0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8,
+  1.5, 1.5,
+];
+const BODY_IDS = {
+  base: 1,
+  FL_hip: 2, FL_thigh: 3, FL_calf: 4,
+  FR_hip: 6, FR_thigh: 7, FR_calf: 8,
+  RL_hip: 10, RL_thigh: 11, RL_calf: 12,
+  RR_hip: 14, RR_thigh: 15, RR_calf: 16,
+  oni: 18,
+};
+const COORD_QUAT = new THREE.Quaternion().setFromAxisAngle(
+  new THREE.Vector3(1, 0, 0), -Math.PI / 2
+);
+
+const params = new URLSearchParams(window.location.search);
+const hashMode = window.location.hash.replace(/^#/, '');
+let mode = (params.get('mode') || hashMode) === 'walk' ? 'walk' : 'flee';
+let withOni = mode !== 'walk';
+
+let mj, model, data;
+let renderer, scene, camera, controls;
+let meshMap = new Map();
+let running = false;
+let done = false;
+let doneReason = '';
+let simTime = 0;
+let simStepCount = 0;
+let speedMult = 1;
+let cmdStrength = 0.8;
+let oniSpeed = 0.025;
+let oniX = 1.5;
+let oniY = 1.5;
+let velCmd = [0, 0, 0];
+let lastAction = new Float32Array(12);
+let walkSession = null;
+let fleeSession = null;
+let walkNorm = null;
+let fleeNorm = null;
+let viewMode = 'top';
+let lastFrame = performance.now();
+let simBudget = 0;
+let stepping = false;
+let fpsFrames = 0;
+let fpsTime = 0;
+const keys = new Set();
+
+function $(id) { return document.getElementById(id); }
+
+function setLoading(title, detail = '') {
+  $('loading-title').textContent = title;
+  $('loading-detail').textContent = detail;
+}
+
+function hideLoading() { $('loading').style.display = 'none'; }
+
+function setPill(id, ok, label) {
+  const el = $(id);
+  el.textContent = label;
+  el.className = 'pill ' + (ok ? 'ok' : 'warn');
+}
+
+function clip(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+function normalizeObs(obs, stats) {
+  if (!stats || !stats.obs_rms_mean || stats.obs_rms_mean.length !== obs.length) {
+    return obs;
+  }
+  const out = new Float32Array(obs.length);
+  const clipObs = stats.clip_obs ?? 10.0;
+  const eps = stats.epsilon ?? 1e-8;
+  for (let i = 0; i < obs.length; i++) {
+    out[i] = clip((obs[i] - stats.obs_rms_mean[i]) / Math.sqrt(stats.obs_rms_var[i] + eps), -clipObs, clipObs);
+  }
+  return out;
+}
+
+async function fetchJsonMaybe(url) {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) return null;
+  return await res.json();
+}
+
+async function loadPolicy(url, pillId, label) {
+  try {
+    const head = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+    if (!head.ok) {
+      setPill(pillId, false, `${label} missing`);
+      return null;
+    }
+    const session = await window.ort.InferenceSession.create(url, {
+      executionProviders: ['wasm'],
+      graphOptimizationLevel: 'all',
+    });
+    setPill(pillId, true, `${label} ready`);
+    return session;
+  } catch (err) {
+    console.warn(`${label} policy load failed`, err);
+    setPill(pillId, false, `${label} failed`);
+    return null;
+  }
+}
+
+async function runPolicy(session, obs, outDim) {
+  const tensor = new window.ort.Tensor('float32', obs, [1, obs.length]);
+  const outputs = await session.run({ obs: tensor });
+  const first = outputs.action ?? outputs[Object.keys(outputs)[0]];
+  const dataOut = first.data;
+  const out = new Float32Array(outDim);
+  for (let i = 0; i < outDim; i++) out[i] = clip(Number(dataOut[i] ?? 0), -1, 1);
+  return out;
+}
+
+function mjPos(bodyId) {
+  const i = bodyId * 3;
+  return new THREE.Vector3(data.xpos[i], data.xpos[i + 2], -data.xpos[i + 1]);
+}
+
+function mjQuat(bodyId) {
+  const i = bodyId * 4;
+  const q = new THREE.Quaternion(
+    data.xquat[i + 1], data.xquat[i + 2], data.xquat[i + 3], data.xquat[i]
+  );
+  return COORD_QUAT.clone().multiply(q);
+}
+
+function projectedGravity() {
+  const w = data.qpos[3], qx = data.qpos[4], qy = data.qpos[5], qz = data.qpos[6];
+  const r00 = 1 - 2 * (qy * qy + qz * qz);
+  const r01 = 2 * (qx * qy + w * qz);
+  const r02 = 2 * (qx * qz - w * qy);
+  const r10 = 2 * (qx * qy - w * qz);
+  const r11 = 1 - 2 * (qx * qx + qz * qz);
+  const r12 = 2 * (qy * qz + w * qx);
+  const r20 = 2 * (qx * qz + w * qy);
+  const r21 = 2 * (qy * qz - w * qx);
+  const r22 = 1 - 2 * (qx * qx + qy * qy);
+  const gx = 0, gy = 0, gz = -1;
+  return [
+    r00 * gx + r10 * gy + r20 * gz,
+    r01 * gx + r11 * gy + r21 * gz,
+    r02 * gx + r12 * gy + r22 * gz,
+  ];
+}
+
+function buildWalkObs() {
+  const g = projectedGravity();
+  const obs = new Float32Array(45);
+  obs[0] = velCmd[0]; obs[1] = velCmd[1]; obs[2] = velCmd[2];
+  obs[3] = data.qvel[3]; obs[4] = data.qvel[4]; obs[5] = data.qvel[5];
+  obs[6] = g[0]; obs[7] = g[1]; obs[8] = g[2];
+  for (let i = 0; i < 12; i++) obs[9 + i] = data.qpos[7 + i] - STANDING_POS[i];
+  for (let i = 0; i < 12; i++) obs[21 + i] = data.qvel[6 + i];
+  for (let i = 0; i < 12; i++) obs[33 + i] = lastAction[i];
+  return normalizeObs(obs, walkNorm);
+}
+
+function buildFleeObs() {
+  const rx = data.qpos[0], ry = data.qpos[1];
+  const dx = oniX - rx, dy = oniY - ry;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  const g = projectedGravity();
+  const obs = new Float32Array([
+    dx, dy, dist,
+    data.qvel[3], data.qvel[4], data.qvel[5],
+    g[0], g[1], g[2],
+    clip((MAX_TIME - simTime) / MAX_TIME, 0, 1),
+  ]);
+  return normalizeObs(obs, fleeNorm);
+}
+
+function applyPD(action) {
+  const ctrlRange = model.actuator_ctrlrange;
+  for (let i = 0; i < 12; i++) {
+    const target = STANDING_POS[i] + action[i] * ACTION_SCALE;
+    const qCur = data.qpos[7 + i];
+    const dqCur = data.qvel[6 + i];
+    const lo = ctrlRange[i * 2];
+    const hi = ctrlRange[i * 2 + 1];
+    data.ctrl[i] = clip(KP * (target - qCur) - KD * dqCur, lo, hi);
+  }
+  lastAction = action;
+}
+
+function moveOni() {
+  if (!withOni) return;
+  const rx = data.qpos[0], ry = data.qpos[1];
+  const dx = rx - oniX, dy = ry - oniY;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist > 0.01) {
+    oniX = clip(oniX + (dx / dist) * oniSpeed, -ARENA_HALF, ARENA_HALF);
+    oniY = clip(oniY + (dy / dist) * oniSpeed, -ARENA_HALF, ARENA_HALF);
+  }
+  data.qpos[19] = oniX;
+  data.qpos[20] = oniY;
+  mj.mj_forward(model, data);
+}
+
+async function stepSimulation() {
+  if (!running || done) return;
+
+  if (withOni && fleeSession && simStepCount % HIGH_LEVEL_INTERVAL === 0) {
+    const action = await runPolicy(fleeSession, buildFleeObs(), 3);
+    velCmd = [action[0], action[1], action[2]];
+  }
+
+  let action = new Float32Array(12);
+  if (walkSession) {
+    action = await runPolicy(walkSession, buildWalkObs(), 12);
+  }
+
+  applyPD(action);
+  for (let i = 0; i < SUBSTEPS; i++) mj.mj_step(model, data);
+  moveOni();
+
+  simStepCount++;
+  simTime += CTRL_DT;
+
+  const z = data.qpos[2];
+  const dist = oniDistance();
+  if (withOni && dist < TAG_DIST) finish('tagged');
+  else if (z < 0.15) finish('fallen');
+  else if (simTime >= MAX_TIME) finish('escaped');
+}
+
+function oniDistance() {
+  const dx = data.qpos[0] - oniX;
+  const dy = data.qpos[1] - oniY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function finish(reason) {
+  done = true;
+  doneReason = reason;
+  running = false;
+  $('play').textContent = '開始';
+  const ok = reason === 'escaped';
+  $('result-title').textContent = ok ? '逃げ切り成功' : reason === 'tagged' ? 'タグされた' : '転倒';
+  $('result-title').style.color = ok ? '#8ce0ad' : '#ff8e8e';
+  $('result-sub').textContent = `生存時間: ${simTime.toFixed(1)} 秒`;
+  $('result').style.borderColor = ok ? '#57c980' : '#e66c6c';
+  $('result').classList.add('show');
+}
+
+function resetSim() {
+  mj.mj_resetData(model, data);
+  for (let i = 0; i < Math.min(data.qpos.length, HOME_QPOS.length); i++) data.qpos[i] = HOME_QPOS[i];
+  data.qvel.fill(0);
+  data.ctrl.fill(0);
+  oniX = withOni ? 1.5 : 20;
+  oniY = withOni ? 1.5 : 20;
+  if (data.qpos.length > 20) {
+    data.qpos[19] = oniX;
+    data.qpos[20] = oniY;
+  }
+  mj.mj_forward(model, data);
+  simTime = 0;
+  simStepCount = 0;
+  done = false;
+  doneReason = '';
+  lastAction = new Float32Array(12);
+  velCmd = [0, 0, 0];
+  simBudget = 0;
+  $('result').classList.remove('show');
+  updateStats();
+}
+
+function initThree() {
+  const canvas = $('canvas');
+  const wrap = $('canvas-wrap');
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0b0d11);
+
+  const ambient = new THREE.AmbientLight(0x9fb7d9, 1.1);
+  scene.add(ambient);
+  const sun = new THREE.DirectionalLight(0xffffff, 2.2);
+  sun.position.set(3, 7, 4);
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0x6e9fff, 0.7);
+  fill.position.set(-4, 3, -3);
+  scene.add(fill);
+
+  camera = new THREE.PerspectiveCamera(50, 1, 0.05, 100);
+  controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.enabled = false;
+  setView('top');
+
+  function resize() {
+    const w = wrap.clientWidth;
+    const h = wrap.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  addEventListener('resize', resize);
+  resize();
+  buildArena();
+}
+
+function setView(next) {
+  viewMode = next;
+  if (!camera) return;
+  if (next === 'top') {
+    camera.up.set(0, 0, -1);
+    camera.position.set(0, 7, 0.001);
+    camera.lookAt(0, 0, 0);
+    if (controls) controls.enabled = false;
+  } else if (next === 'side') {
+    camera.up.set(0, 1, 0);
+    camera.position.set(4.5, 3.2, 4.5);
+    camera.lookAt(0, 0.3, 0);
+    if (controls) controls.enabled = false;
+  } else {
+    camera.up.set(0, 1, 0);
+    camera.position.set(4, 3, 4);
+    camera.lookAt(0, 0.3, 0);
+    if (controls) controls.enabled = true;
+  }
+}
+
+function buildArena() {
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(5, 5),
+    new THREE.MeshLambertMaterial({ color: 0x29402f })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  scene.add(ground);
+  const grid = new THREE.GridHelper(5, 10, 0x4e7657, 0x36503d);
+  grid.position.y = 0.002;
+  scene.add(grid);
+  const wallMat = new THREE.MeshLambertMaterial({ color: 0x607083, transparent: true, opacity: 0.45 });
+  [
+    [[0, 0.5, -2.55], [5.1, 1.0, 0.1]],
+    [[0, 0.5, 2.55], [5.1, 1.0, 0.1]],
+    [[2.55, 0.5, 0], [0.1, 1.0, 5.1]],
+    [[-2.55, 0.5, 0], [0.1, 1.0, 5.1]],
+  ].forEach(([pos, size]) => {
+    const wall = new THREE.Mesh(new THREE.BoxGeometry(...size), wallMat);
+    wall.position.set(...pos);
+    scene.add(wall);
+  });
+}
+
+function buildRobotMeshes() {
+  const trunkMat = new THREE.MeshLambertMaterial({ color: 0xe2bc45 });
+  const hipMat = new THREE.MeshLambertMaterial({ color: 0x8493a6 });
+  const thighMat = new THREE.MeshLambertMaterial({ color: 0x5f78aa });
+  const calfMat = new THREE.MeshLambertMaterial({ color: 0x415a83 });
+  const oniMat = new THREE.MeshLambertMaterial({ color: 0xdf3f42 });
+
+  function box(x, y, z, mat) { return new THREE.Mesh(new THREE.BoxGeometry(x, y, z), mat); }
+  function sphere(r, mat) { return new THREE.Mesh(new THREE.SphereGeometry(r, 16, 10), mat); }
+  function cyl(r, h, mat) {
+    const mesh = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 10), mat);
+    mesh.rotation.z = Math.PI / 2;
+    return mesh;
+  }
+  function add(id, mesh) {
+    meshMap.set(id, mesh);
+    scene.add(mesh);
+  }
+
+  const trunk = new THREE.Group();
+  trunk.add(box(0.38, 0.1, 0.12, trunkMat));
+  const nose = box(0.07, 0.05, 0.05, new THREE.MeshLambertMaterial({ color: 0x65d5ff }));
+  nose.position.x = 0.22;
+  trunk.add(nose);
+  add(BODY_IDS.base, trunk);
+
+  [
+    [BODY_IDS.FL_hip, BODY_IDS.FL_thigh, BODY_IDS.FL_calf],
+    [BODY_IDS.FR_hip, BODY_IDS.FR_thigh, BODY_IDS.FR_calf],
+    [BODY_IDS.RL_hip, BODY_IDS.RL_thigh, BODY_IDS.RL_calf],
+    [BODY_IDS.RR_hip, BODY_IDS.RR_thigh, BODY_IDS.RR_calf],
+  ].forEach(([hip, thigh, calf]) => {
+    add(hip, sphere(0.045, hipMat));
+    add(thigh, cyl(0.023, 0.22, thighMat));
+    add(calf, cyl(0.019, 0.22, calfMat));
+  });
+
+  const oni = sphere(0.28, oniMat);
+  add(BODY_IDS.oni, oni);
+  if (!withOni) oni.visible = false;
+}
+
+function updateMeshes() {
+  if (!data) return;
+  for (const [id, mesh] of meshMap.entries()) {
+    mesh.position.copy(mjPos(id));
+    mesh.quaternion.copy(mjQuat(id));
+  }
+}
+
+function updateCameraFollow() {
+  if (!data) return;
+  const rx = data.qpos[0], ry = data.qpos[1];
+  if (viewMode === 'top') {
+    camera.position.set(rx, 7, -ry + 0.001);
+    camera.lookAt(rx, 0, -ry);
+  } else if (viewMode === 'side') {
+    camera.position.set(rx + 4.5, 3.2, -ry + 4.5);
+    camera.lookAt(rx, 0.3, -ry);
+  }
+}
+
+function updateStats() {
+  if (!data) return;
+  const dist = oniDistance();
+  $('st-time').textContent = `${simTime.toFixed(1)} s`;
+  $('time-bar').style.width = `${Math.min(100, simTime / MAX_TIME * 100)}%`;
+  $('st-dist').textContent = withOni ? `${dist.toFixed(2)} m` : '-- m';
+  $('st-height').textContent = `${data.qpos[2].toFixed(3)} m`;
+  if (done) {
+    $('st-state').textContent = doneReason;
+  } else if (!running) {
+    $('st-state').textContent = '停止中';
+  } else if (withOni && dist < TAG_DIST * 1.5) {
+    $('st-state').textContent = '危険';
+  } else if (!walkSession) {
+    $('st-state').textContent = '歩行モデル未読込';
+  } else {
+    $('st-state').textContent = withOni && fleeSession ? 'AI逃走中' : '手動操作中';
+  }
+}
+
+async function runPendingSteps() {
+  if (stepping) return;
+  stepping = true;
+  try {
+    let loops = 0;
+    while (simBudget >= CTRL_DT && loops < 6) {
+      simBudget -= CTRL_DT;
+      await stepSimulation();
+      loops++;
+    }
+  } finally {
+    stepping = false;
+  }
+}
+
+function animationLoop(now) {
+  requestAnimationFrame(animationLoop);
+  const dt = Math.min((now - lastFrame) / 1000, 0.12);
+  lastFrame = now;
+
+  fpsFrames++;
+  fpsTime += dt;
+  if (fpsTime >= 0.5) {
+    $('header-status').textContent = `${Math.round(fpsFrames / fpsTime)} fps`;
+    fpsFrames = 0;
+    fpsTime = 0;
+  }
+
+  if (running && !done) {
+    simBudget += dt * speedMult;
+    runPendingSteps();
+  }
+
+  updateMeshes();
+  updateCameraFollow();
+  updateStats();
+  if (controls) controls.update();
+  renderer.render(scene, camera);
+}
+
+function updateManualCommand() {
+  if (fleeSession && withOni) return;
+  let vx = 0, vy = 0, omega = 0;
+  if (keys.has('w') || keys.has('arrowup')) vx += cmdStrength;
+  if (keys.has('s') || keys.has('arrowdown')) vx -= cmdStrength;
+  if (keys.has('q')) vy += cmdStrength * 0.5;
+  if (keys.has('e')) vy -= cmdStrength * 0.5;
+  if (keys.has('a') || keys.has('arrowleft')) omega += cmdStrength;
+  if (keys.has('d') || keys.has('arrowright')) omega -= cmdStrength;
+  velCmd = [vx, vy, omega];
+}
+
+function wireUI() {
+  $('mode-badge').textContent = mode === 'walk' ? 'walk viewer' : 'flee viewer';
+  $('oni-section').style.display = withOni ? '' : 'none';
+
+  $('play').addEventListener('click', () => {
+    if (done) resetSim();
+    running = !running;
+    $('play').textContent = running ? '停止' : '開始';
+  });
+  $('reset').addEventListener('click', () => {
+    running = false;
+    $('play').textContent = '開始';
+    resetSim();
+  });
+  $('speed').addEventListener('input', e => {
+    speedMult = Number(e.target.value);
+    $('speed-label').textContent = `${speedMult}x`;
+  });
+  $('cmd-strength').addEventListener('input', e => {
+    cmdStrength = Number(e.target.value);
+    $('cmd-label').textContent = cmdStrength.toFixed(1);
+    updateManualCommand();
+  });
+  $('oni-speed').addEventListener('input', e => {
+    oniSpeed = Number(e.target.value);
+    $('oni-label').textContent = oniSpeed.toFixed(3);
+  });
+  [['view-top', 'top'], ['view-side', 'side'], ['view-free', 'free']].forEach(([id, v]) => {
+    $(id).addEventListener('click', () => {
+      setView(v);
+      ['view-top', 'view-side', 'view-free'].forEach(x => $(x).classList.remove('active'));
+      $(id).classList.add('active');
+    });
+  });
+
+  addEventListener('keydown', e => {
+    const k = e.key.toLowerCase();
+    if (k === ' ') {
+      e.preventDefault();
+      velCmd = [0, 0, 0];
+      keys.clear();
+    } else {
+      keys.add(k);
+    }
+    if (k === 'r') resetSim();
+    updateManualCommand();
+  });
+  addEventListener('keyup', e => {
+    keys.delete(e.key.toLowerCase());
+    updateManualCommand();
+  });
+  document.querySelectorAll('.dpad button').forEach(btn => {
+    const k = btn.dataset.key;
+    const down = () => {
+      if (k === 'stop' || k === 'space') {
+        keys.clear();
+        velCmd = [0, 0, 0];
+      } else {
+        keys.add(k);
+      }
+      updateManualCommand();
+    };
+    const up = () => {
+      keys.delete(k);
+      updateManualCommand();
+    };
+    btn.addEventListener('pointerdown', down);
+    btn.addEventListener('pointerup', up);
+    btn.addEventListener('pointerleave', up);
+  });
+}
+
+async function initMujoco() {
+  setLoading('MuJoCo WASM を読み込み中', './vendor/mujoco/mujoco_wasm.js');
+  const mod = await import('./vendor/mujoco/mujoco_wasm.js');
+  const loadMujoco = mod.default;
+  mj = await loadMujoco();
+  mj.FS.mkdir('/working');
+  mj.FS.mount(mj.MEMFS, { root: '.' }, '/working');
+
+  for (const name of ['arena_web.xml', 'go2_simple.xml']) {
+    const res = await fetch(`../models/go2/${name}`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to load ${name}: ${res.status}`);
+    mj.FS.writeFile(`/working/${name}`, await res.text());
+  }
+  model = mj.MjModel.loadFromXML('/working/arena_web.xml');
+  data = new mj.MjData(model);
+  setPill('pill-mj', true, 'mujoco ready');
+}
+
+async function initPolicies() {
+  if (!window.ort) throw new Error('onnxruntime-web was not loaded from webapp/vendor/ort');
+  window.ort.env.wasm.numThreads = 1;
+  window.ort.env.wasm.wasmPaths = './vendor/ort/';
+
+  setLoading('ONNX ポリシーを読み込み中', 'walk_policy.onnx / flee_policy.onnx');
+  walkNorm = await fetchJsonMaybe('./models/walk_vecnorm.json');
+  fleeNorm = await fetchJsonMaybe('./models/flee_vecnorm.json');
+  walkSession = await loadPolicy('./models/walk_policy.onnx', 'pill-walk', 'walk');
+  if (withOni) {
+    fleeSession = await loadPolicy('./models/flee_policy.onnx', 'pill-flee', 'flee');
+  } else {
+    setPill('pill-flee', false, 'flee unused');
+  }
+
+  if (!walkSession) {
+    $('policy-note').textContent = '歩行モデルが未エクスポートです。ロボットは立ち姿勢の確認のみできます。';
+  } else if (withOni && !fleeSession) {
+    $('policy-note').textContent = '逃走モデルが未エクスポートです。WASD で手動操作できます。';
+  } else {
+    $('policy-note').textContent = withOni ? 'AI 逃走モードで実行できます。' : 'WASD で歩行確認できます。';
+  }
+}
+
+async function main() {
+  wireUI();
+  initThree();
+  await initMujoco();
+  buildRobotMeshes();
+  await initPolicies();
+  resetSim();
+  hideLoading();
+  lastFrame = performance.now();
+  requestAnimationFrame(animationLoop);
+}
+
+main().catch(err => {
+  console.error(err);
+  setLoading('ビューアーの初期化に失敗しました', String(err && err.message ? err.message : err));
+  setPill('pill-mj', false, 'init failed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+{
+  "summary": {
+    "candidate": "runs\\walk_base\\walk_smoke_001\\candidates\\walk_seed0",
+    "seed": 0,
+    "score": -2990.8926733134144,
+    "passed": false,
+    "walk_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "mean_survived_seconds": 6.0,
+      "min_survived_seconds": 6.0,
+      "min_height": 0.2707326686585787
+    },
+    "tag_summary": {
+      "passed": false,
+      "fall_count": 3,
+      "mean_survived_seconds": 0.20000000000000004,
+      "min_survived_seconds": 0.2,
+      "min_height": 0.1444133574635864
+    },
+    "video": "runs\\walk_base\\walk_smoke_001\\videos\\walk_seed0_forward.mp4"
+  },
+  "rows": [
+    {
+      "layer": "walk_env",
+      "command": "stand",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 6.0,
+      "mean_height": 0.2972633560128216,
+      "min_height": 0.2707326686585787,
+      "mean_vx": 0.15188095224001297,
+      "mean_vy": 0.002479491626189112,
+      "mean_omega": -0.015305854279365677,
+      "velocity_rmse": 0.23017265076909832
+    },
+    {
+      "layer": "walk_env",
+      "command": "forward_0.25",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 6.0,
+      "mean_height": 0.2981600325665321,
+      "min_height": 0.2726590684715322,
+      "mean_vx": 0.24977481949056976,
+      "mean_vy": 0.0009619155672659929,
+      "mean_omega": -0.027599026566110657,
+      "velocity_rmse": 0.188047833155645
+    },
+    {
+      "layer": "walk_env",
+      "command": "forward_0.4",
+      "seed": 100,
+      "fell": false,
+      "survived_seconds": 6.0,
+      "mean_height": 0.2985401809158615,
+      "min_height": 0.27295642514067436,
+      "mean_vx": 0.3079463170422649,
+      "mean_vy": -0.0005936094162424514,
+      "mean_omega": -0.03357819572032489,
+      "velocity_rmse": 0.18714216046760115
+    },
+    {
+      "layer": "tag_env",
+      "command": "tag_stand",
+      "seed": 100,
+      "fell": true,
+      "survived_seconds": 0.2,
+      "mean_height": null,
+      "min_height": 0.1444133574635864,
+      "mean_vx": null,
+      "mean_vy": null,
+      "mean_omega": null,
+      "velocity_rmse": null
+    },
+    {
+      "layer": "tag_env",
+      "command": "tag_forward_0.25",
+      "seed": 100,
+      "fell": true,
+      "survived_seconds": 0.2,
+      "mean_height": null,
+      "min_height": 0.1444138180976067,
+      "mean_vx": null,
+      "mean_vy": null,
+      "mean_omega": null,
+      "velocity_rmse": null
+    },
+    {
+      "layer": "tag_env",
+      "command": "tag_forward_0.4",
+      "seed": 100,
+      "fell": true,
+      "survived_seconds": 0.2,
+      "mean_height": null,
+      "min_height": 0.1444141059048512,
+      "mean_vx": null,
+      "mean_vy": null,
+      "mean_omega": null,
+      "velocity_rmse": null
+    }
+  ]
+}

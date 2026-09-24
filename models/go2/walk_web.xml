@@ -1,0 +1,32 @@
+<!-- Web viewer walk scene: uses go2.xml (with OBJ visual meshes) for mjswan.
+     Flat floor only (no walls / no oni). -->
+<mujoco model="go2_walk_web">
+  <include file="go2_posctrl.xml"/>
+
+  <statistic center="0 0 0.3" extent="1.5"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="-120" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient"
+      rgb1="0.4 0.6 0.8" rgb2="0.1 0.2 0.3" width="512" height="3072"/>
+    <texture type="2d" name="floor_tex" builtin="checker"
+      rgb1="0.55 0.55 0.55" rgb2="0.45 0.45 0.45" width="200" height="200"/>
+    <material name="floor_mat" texture="floor_tex" texrepeat="6 6" reflectance="0.1"/>
+  </asset>
+
+  <worldbody>
+    <light name="sun" pos="1 0 4" dir="-0.3 0 -1" directional="true"
+      diffuse="0.8 0.8 0.8" specular="0 0 0"/>
+    <!-- 広い平地（歩行確認用） -->
+    <geom name="floor" type="plane" size="20 20 0.1"
+      material="floor_mat" friction="0.8 0.1 0.1"
+      contype="1" conaffinity="1"/>
+  </worldbody>
+
+  <!-- keyframe "home" は go2.xml 側で定義済み -->
+</mujoco>

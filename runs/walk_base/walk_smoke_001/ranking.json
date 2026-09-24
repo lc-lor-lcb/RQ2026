@@ -1,0 +1,23 @@
+[
+  {
+    "candidate": "runs\\walk_base\\walk_smoke_001\\candidates\\walk_seed0",
+    "seed": 0,
+    "score": -2990.8926733134144,
+    "passed": false,
+    "walk_summary": {
+      "passed": true,
+      "fall_count": 0,
+      "mean_survived_seconds": 6.0,
+      "min_survived_seconds": 6.0,
+      "min_height": 0.2707326686585787
+    },
+    "tag_summary": {
+      "passed": false,
+      "fall_count": 3,
+      "mean_survived_seconds": 0.20000000000000004,
+      "min_survived_seconds": 0.2,
+      "min_height": 0.1444133574635864
+    },
+    "video": "runs\\walk_base\\walk_smoke_001\\videos\\walk_seed0_forward.mp4"
+  }
+]

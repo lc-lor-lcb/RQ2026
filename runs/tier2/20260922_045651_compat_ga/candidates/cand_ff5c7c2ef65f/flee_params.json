@@ -1,0 +1,43 @@
+{
+  "kind": "flee",
+  "reward_config": {
+    "survival_weight": 1.5675269308858506,
+    "distance_weight": 0.8852080258128139,
+    "tag_penalty": 56.771738503038335,
+    "fall_penalty": 26.30059313355078
+  },
+  "timesteps": 2000,
+  "num_envs": 1,
+  "ppo_kwargs": {
+    "learning_rate": 0.0004775093445985413,
+    "n_steps": 2048,
+    "batch_size": 64,
+    "n_epochs": 5,
+    "gamma": 0.9677748758282154,
+    "gae_lambda": 0.9720363469291936,
+    "ent_coef": 0.01452668826115535,
+    "policy_kwargs": {
+      "net_arch": [
+        256,
+        256
+      ]
+    },
+    "device": "cpu"
+  },
+  "seed": 1,
+  "oni_speed": 0.019412897376645533,
+  "total_timesteps": 2000,
+  "elapsed_seconds": 40.702999999999975,
+  "tier2_candidate_id": "cand_ff5c7c2ef65f",
+  "strategic_reward": {
+    "escape_bonus": 173.40798848310448,
+    "distance_delta_weight": 14.618372640156958,
+    "wall_penalty_weight": 1.1393336071477285,
+    "yaw_action_weight": 0.001056300682798268,
+    "lateral_action_weight": 0.07987269864215209,
+    "distance_closing_penalty": 2.7782036803040904,
+    "action_change_weight": 0.07371347155708911,
+    "stall_penalty_weight": 0.05450245404833876,
+    "danger_wall_penalty_weight": 5.53000511885829
+  }
+}
