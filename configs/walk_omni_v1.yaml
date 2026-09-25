@@ -1,0 +1,121 @@
+# 現在の最良歩行モデル(walk_sprint_turn_001)を土台に、
+# 後退・横歩き・その場旋回を追加学習するカリキュラム。 v3
+#
+# 設計方針(v2で「全指令に対して立ち止まる」退行が起きたための作り直し):
+#   このリポジトリの既存プロファイル(standard/strong/race/escape/sprint_turn。
+#   train_speed_walk_base.py の PROFILES を参照)と同じやり方に揃えた。
+#     - 範囲は狭く始めて、前の段階を大きく壊さない程度に少しずつ広げる
+#       (例: standard は vx [0.45,0.65] → [0.60,0.90] → ... と広げている)
+#     - 新しい軸(後退/横歩き/旋回)は1つずつ足す。同時に広い範囲で
+#       全部混ぜるステージは作らない
+#     - 報酬は AGILITY_REWARD をそのまま使う(独自の重み調整はしない)
+#     - 最後に必ず「全体を薄く混ぜて仕上げる」polish段階を置く
+#       (agility_polish / sprint_turn_polish と同じ役割)
+#
+# 各段階の直後に scripts/train_omni_walk.py がチェックポイントと簡易評価を
+# 自動保存する(runs/walk_base/<run>/checkpoints/<段階名>/)。
+# ログの vx/vy/omega が指令と大きくズレている場合は、そこで一旦Ctrl+Cで止めて、
+#   python -m scripts.train_omni_walk --config configs/walk_omni_v1.yaml --resume runs/walk_base/<run>
+# で該当段階の手前から見直すこと。
+#
+# 合計ステップ数の目安:
+#   220k+260k+260k+300k+260k+300k+350k+350k+350k = 2,650,000
+# (v2の179万より長い。実績のある「狭く→広く」のペースに合わせた結果)
+
+source: runs/walk_base/walk_sprint_turn_001/best
+output_root: runs/walk_base
+run_name: null
+num_envs: 8
+seconds: 12.0
+seeds: [100, 101, 102]
+record_videos: false
+
+stages:
+  # --- 後退(既存の前進手本の符号を反転するだけで使える。物理的な根拠あり) ---
+  - name: reverse_narrow
+    steps: 220000
+    mode: axis
+    imitation: true
+    ranges:
+      vx: [-0.35, -0.15]
+      vy: [0.0, 0.0]
+      omega: [0.0, 0.0]
+
+  - name: reverse_wider
+    steps: 260000
+    mode: axis
+    imitation: false
+    ranges:
+      vx: [-0.70, -0.25]
+      vy: [0.0, 0.0]
+      omega: [0.0, 0.0]
+
+  # --- 横歩き(新規に作った手本を使う。reverse系より不確実性が高い) ---
+  - name: lateral_narrow
+    steps: 260000
+    mode: axis
+    imitation: true
+    ranges:
+      vx: [0.0, 0.0]
+      vy: [-0.25, 0.25]
+      omega: [0.0, 0.0]
+
+  - name: lateral_wider
+    steps: 300000
+    mode: axis
+    imitation: false
+    ranges:
+      vx: [0.0, 0.0]
+      vy: [-0.45, 0.45]
+      omega: [0.0, 0.0]
+
+  # --- その場旋回(前回のagilityプロファイルで実績のある範囲(±0.85)に合わせる) ---
+  - name: pivot_turn
+    steps: 260000
+    mode: axis
+    imitation: false
+    ranges:
+      vx: [0.0, 0.15]
+      vy: [0.0, 0.0]
+      omega: [-0.85, 0.85]
+
+  # --- ここから2軸ずつ合流。まだvyは混ぜない ---
+  - name: reverse_turn
+    steps: 300000
+    mode: uniform
+    imitation: false
+    ranges:
+      vx: [-0.60, -0.15]
+      vy: [0.0, 0.0]
+      omega: [-0.60, 0.60]
+
+  - name: forward_reverse_polish
+    # 既存の前進域(walk_sprint_turn_001の得意範囲)を明示的に戻しつつ、
+    # 後退・旋回を保持する。ここで前進性能を忘れていないか要確認。
+    steps: 350000
+    mode: uniform
+    imitation: false
+    ranges:
+      vx: [-0.60, 1.50]
+      vy: [0.0, 0.0]
+      omega: [-0.90, 0.90]
+
+  # --- 最後に横歩きを合流。vyはsprint_turn_polish(±0.12)より広いが、
+  #     v2で失敗した±0.5よりは狭くしてある ---
+  - name: lateral_polish
+    steps: 350000
+    mode: uniform
+    imitation: false
+    ranges:
+      vx: [-0.60, 1.50]
+      vy: [-0.35, 0.35]
+      omega: [-0.90, 0.90]
+
+  - name: full_polish
+    steps: 350000
+    mode: uniform
+    imitation: false
+    ranges:
+      vx: [-0.70, 1.50]
+      vy: [-0.40, 0.40]
+      omega: [-1.10, 1.10]
