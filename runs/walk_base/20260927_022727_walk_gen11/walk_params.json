@@ -1,0 +1,83 @@
+{
+  "kind": "walk",
+  "generation": 11,
+  "source": "runs\\walk_base\\20260926_234850_walk_gen10",
+  "stage": {
+    "name": "angle_high_speed",
+    "steps": 1200000,
+    "speed": [
+      0.85,
+      1.4
+    ],
+    "angle": [
+      -180.0,
+      180.0
+    ],
+    "omega": [
+      -0.25,
+      0.25
+    ],
+    "direction_error_weight": -2.0,
+    "ent_coef": 0.0022,
+    "learning_rate": 9.5e-06
+  },
+  "physics": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ]
+  },
+  "walk_env_kwargs": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ],
+    "command_mode": "uniform",
+    "command_ranges": {
+      "vx": [
+        -1.4,
+        1.4
+      ],
+      "vy": [
+        -1.2,
+        1.2
+      ],
+      "omega": [
+        -0.9,
+        0.9
+      ]
+    }
+  },
+  "angle_training": {
+    "enabled": true,
+    "speed_range": [
+      0.85,
+      1.4
+    ],
+    "angle_range_deg": [
+      -180.0,
+      180.0
+    ],
+    "omega_range": [
+      -0.25,
+      0.25
+    ],
+    "direction_error_weight": -2.0,
+    "direction_error_formula": "weight * (1 - cos(actual_angle - target_angle))"
+  },
+  "ppo": {
+    "learning_rate": 9.5e-06,
+    "target_kl": 0.007,
+    "n_epochs": 5,
+    "ent_coef": 0.0022,
+    "device": "cuda"
+  }
+}

@@ -1,0 +1,890 @@
+[
+  {
+    "stage": {
+      "name": "foundation_reinforcement",
+      "steps": 650000,
+      "ranges": {
+        "vx": [
+          -1.2,
+          1.4
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.15,
+          0.15
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0028,
+      "learning_rate": 1.1e-05
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 650000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 1.1e-05,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0028,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 32169984,
+      "control_dt": 0.02,
+      "elapsed_seconds": 424.23499999998603,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -1.2,
+            1.4
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.15,
+            0.15
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "forward_reverse_balance",
+      "steps": 800000,
+      "ranges": {
+        "vx": [
+          -1.2,
+          1.4
+        ],
+        "vy": [
+          -0.45,
+          0.45
+        ],
+        "omega": [
+          -0.18,
+          0.18
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0026,
+      "learning_rate": 1.05e-05
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 800000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 1.05e-05,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0026,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 32989184,
+      "control_dt": 0.02,
+      "elapsed_seconds": 552.8439999999828,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -1.2,
+            1.4
+          ],
+          "vy": [
+            -0.45,
+            0.45
+          ],
+          "omega": [
+            -0.18,
+            0.18
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "lateral_speed_quality",
+      "steps": 850000,
+      "ranges": {
+        "vx": [
+          -0.45,
+          0.45
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.18,
+          0.18
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0025,
+      "learning_rate": 1e-05
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 850000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 1e-05,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0025,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 33849344,
+      "control_dt": 0.02,
+      "elapsed_seconds": 598.3119999999763,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -0.45,
+            0.45
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.18,
+            0.18
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "forward_diagonal_precision",
+      "steps": 1000000,
+      "ranges": {
+        "vx": [
+          0.4,
+          1.4
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.25,
+          0.25
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0023,
+      "learning_rate": 9.8e-06
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 1000000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 9.8e-06,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0023,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 34852864,
+      "control_dt": 0.02,
+      "elapsed_seconds": 619.829000000027,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            0.4,
+            1.4
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.25,
+            0.25
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "reverse_diagonal_precision",
+      "steps": 1000000,
+      "ranges": {
+        "vx": [
+          -1.2,
+          -0.25
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.25,
+          0.25
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0023,
+      "learning_rate": 9.8e-06
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 1000000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 9.8e-06,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0023,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 35856384,
+      "control_dt": 0.02,
+      "elapsed_seconds": 606.7810000000172,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -1.2,
+            -0.25
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.25,
+            0.25
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "full_360_precision",
+      "steps": 1200000,
+      "ranges": {
+        "vx": [
+          -1.2,
+          1.4
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.3,
+          0.3
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.002,
+      "learning_rate": 9.2e-06
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 1200000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 9.2e-06,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.002,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 37064704,
+      "control_dt": 0.02,
+      "elapsed_seconds": 823.5470000000205,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -1.2,
+            1.4
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.3,
+            0.3
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "movement_turn_precision",
+      "steps": 1050000,
+      "ranges": {
+        "vx": [
+          -1.2,
+          1.4
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.9,
+          0.9
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0018,
+      "learning_rate": 8.8e-06
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 1050000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 8.8e-06,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0018,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 38129664,
+      "control_dt": 0.02,
+      "elapsed_seconds": 725.7660000000033,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -1.2,
+            1.4
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.9,
+            0.9
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  },
+  {
+    "stage": {
+      "name": "final_omnidirectional_polish",
+      "steps": 1300000,
+      "ranges": {
+        "vx": [
+          -1.2,
+          1.4
+        ],
+        "vy": [
+          -1.2,
+          1.2
+        ],
+        "omega": [
+          -0.9,
+          0.9
+        ]
+      },
+      "mode": "uniform",
+      "ent_coef": 0.0015,
+      "learning_rate": 8.2e-06
+    },
+    "params": {
+      "kind": "walk",
+      "reward_config": {
+        "linear_tracking_variance": 0.18,
+        "angular_tracking_variance": 0.18,
+        "lin_vel_weight": 8.0,
+        "ang_vel_weight": 7.0,
+        "linear_error_weight": -2.5,
+        "angular_error_weight": -4.0,
+        "orientation_weight": -8.0,
+        "base_height_target": 0.29,
+        "base_height_weight": -260.0,
+        "vertical_velocity_weight": -1.0,
+        "nonfoot_contact_weight": -2.0,
+        "knee_height_target": 0.08,
+        "knee_height_weight": -350.0,
+        "torques_weight": -2.5e-05,
+        "action_rate_weight": -0.01,
+        "joint_velocity_weight": -0.001,
+        "stand_joint_velocity_weight": -0.01,
+        "feet_gait_weight": 0.0,
+        "diagonal_support_weight": 0.2,
+        "foot_slip_weight": -0.02,
+        "fall_penalty": 40.0
+      },
+      "timesteps": 1300000,
+      "num_envs": 20,
+      "ppo_kwargs": {
+        "learning_rate": 8.2e-06,
+        "n_steps": 1024,
+        "batch_size": 256,
+        "n_epochs": 5,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "ent_coef": 0.0015,
+        "target_kl": 0.0075,
+        "policy_kwargs": {
+          "net_arch": [
+            256,
+            256,
+            128
+          ]
+        },
+        "device": "cuda"
+      },
+      "seed": 0,
+      "oni_speed": 0.025,
+      "total_timesteps": 39440384,
+      "control_dt": 0.02,
+      "elapsed_seconds": 902.1560000000172,
+      "environment_revision": "walk-v2",
+      "walk_env_kwargs": {
+        "action_scale": 0.6,
+        "joint_stiffness": 60.0,
+        "joint_damping": 2.0,
+        "torque_limits": [
+          23.7,
+          23.7,
+          45.43
+        ],
+        "command_mode": "uniform",
+        "command_ranges": {
+          "vx": [
+            -1.2,
+            1.4
+          ],
+          "vy": [
+            -1.2,
+            1.2
+          ],
+          "omega": [
+            -0.9,
+            0.9
+          ]
+        }
+      },
+      "bootstrap_result": null,
+      "initial_log_std": -2.0,
+      "freeze_normalization": false,
+      "python": "3.12.10",
+      "packages": {
+        "mujoco": "3.8.1",
+        "gymnasium": "1.3.0",
+        "stable-baselines3": "2.9.0",
+        "torch": "2.14.0+cu130",
+        "numpy": "2.5.3"
+      }
+    }
+  }
+]
