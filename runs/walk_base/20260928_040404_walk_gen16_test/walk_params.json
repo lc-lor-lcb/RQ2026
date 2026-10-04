@@ -1,0 +1,71 @@
+{
+  "kind": "walk",
+  "generation": "16-test",
+  "source": "runs\\walk_base\\walk_gen14_main_001\\best",
+  "stage": {
+    "name": "ang_err_highlr_stage2",
+    "steps": 200000,
+    "speed": [
+      0.4,
+      1.4
+    ],
+    "angle": [
+      -180.0,
+      180.0
+    ],
+    "direction_error_weight": -3.0,
+    "heading_drift_weight": -3.5,
+    "angular_error_weight": -4.0,
+    "switch_steps": 120,
+    "ent_coef": 0.0025,
+    "learning_rate": 6e-05
+  },
+  "physics": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ]
+  },
+  "walk_env_kwargs": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ],
+    "command_mode": "uniform",
+    "command_ranges": {
+      "vx": [
+        -1.4,
+        1.4
+      ],
+      "vy": [
+        -1.2,
+        1.2
+      ],
+      "omega": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "reward_config_diff": {
+    "angular_error_weight": -4.0
+  },
+  "purpose": "Reward-side fix: enable angular_error_weight (no observation change) to see whether directly penalizing instantaneous yaw-rate bias reduces absolute heading drift, since prior attempts (stronger heading_drift_weight, looser target_kl, higher ent_coef) had zero measurable effect.",
+  "ppo": {
+    "learning_rate": 6e-05,
+    "target_kl": 0.007,
+    "n_epochs": 5,
+    "ent_coef": 0.0025,
+    "device": "cuda"
+  },
+  "vec_env_cls": "SubprocVecEnv",
+  "num_envs": 20
+}

@@ -1,0 +1,90 @@
+{
+  "kind": "walk",
+  "generation": 13,
+  "source": "runs\\walk_base\\walk_gen12_random_angle_001\\best",
+  "stage": {
+    "name": "final_fixed_heading",
+    "steps": 1500000,
+    "speed": [
+      0.3,
+      1.4
+    ],
+    "angle": [
+      -180.0,
+      180.0
+    ],
+    "omega": [
+      0.0,
+      0.0
+    ],
+    "direction_error_weight": -3.0,
+    "switch_steps": 80,
+    "ent_coef": 0.0015,
+    "learning_rate": 8e-06
+  },
+  "physics": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ]
+  },
+  "walk_env_kwargs": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ],
+    "command_mode": "uniform",
+    "command_ranges": {
+      "vx": [
+        -1.4,
+        1.4
+      ],
+      "vy": [
+        -1.2,
+        1.2
+      ],
+      "omega": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "fixed_heading_training": {
+    "enabled": true,
+    "commanded_omega_fixed_zero": true,
+    "body_turning_is_not_a_training_target": true,
+    "speed_range": [
+      0.3,
+      1.4
+    ],
+    "angle_range_deg": [
+      -180.0,
+      180.0
+    ],
+    "omega_range": [
+      0.0,
+      0.0
+    ],
+    "command_switch_steps": 80,
+    "continuous_uniform_angle": true,
+    "translation_only": true,
+    "direction_error_weight": -3.0
+  },
+  "ppo": {
+    "learning_rate": 8e-06,
+    "target_kl": 0.007,
+    "n_epochs": 5,
+    "ent_coef": 0.0015,
+    "device": "cuda"
+  },
+  "vec_env_cls": "SubprocVecEnv",
+  "num_envs": 30
+}

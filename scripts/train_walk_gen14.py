@@ -1,41 +1,72 @@
 """
-Generation-13 fixed-heading omnidirectional walk evolution.
+Generation-14 fixed-heading omnidirectional walk evolution (heading-stable).
 
-Based on Gen12's dynamic random-angle training, Gen13 removes commanded yaw
-and concentrates on accurate translation. The target movement direction is sampled
-continuously from -180..180 degrees and is periodically re-sampled so the
-walker must learn to translate in the requested direction without using a turn command.
+Gen13 established solid 360-degree translation accuracy (mean_direction_error
+~3.07 deg / max ~54.4 deg once the 6 turn-only eval commands are excluded,
+0 falls) but investigation of the Gen13 run (walk_gen13_fixed_heading_002)
+surfaced two separate problems:
 
-Key points:
-- Keeps the 45-D observation space and Gen11-compatible policy weights.
-- Keeps Gen11 physics/reward structure.
-- Uses SubprocVecEnv explicitly (important for the fast training path).
-- Random angle is sampled on reset and then re-sampled during the episode.
-- The command hold interval is shortened through the curriculum.
-- No escape/tag behavior is trained here.
+1. EVAL COMMAND SET MISMATCH (cosmetic, not a training bug):
+   `build_commands()` (imported unchanged from train_walk_gen11.py) still
+   contains 6 commands that require a nonzero omega:
+   turn_left_sprint, turn_right_sprint, left_turn, right_turn,
+   back_left_turn, back_right_turn. Gen13/Gen14 never train with a nonzero
+   omega command (command_ranges["omega"] is pinned to [0.0, 0.0]
+   throughout every stage), so feeding these 6 commands directly via
+   set_vel_cmd() at eval/video time puts the policy on input it has never
+   seen in training (a nonzero commanded omega in the observation), and it
+   responds by essentially freezing in place. This produced the "robot just
+   stands still" videos and inflated max_direction_error_deg (89.6 deg, from
+   `left_turn`) in walk_gen13's evaluation summary. Fix: evaluate and
+   record video only for the omega == 0 subset of build_commands()
+   (see build_commands_fixed_heading() below).
 
-Fixes applied vs. the original Gen13 draft:
-1. Per-stage learning_rate / ent_coef are now actually applied to the
-   reloaded model before each stage's .learn() call (previously they were
-   only written to walk_params.json for reference and never touched the
-   live PPO object).
-2. --profile's default now matches an actual key in GEN13_PROFILES
-   ("fixed_heading" instead of the stale Gen12-era "random_angle"), which
-   previously KeyError'd immediately on any run that didn't pass
-   --profile explicitly (argparse does not validate `default` against
-   `choices`).
-3. Confirmed against train_walk_gen11.py: AngleAwareGo2WalkEnv._sample_angle_command()
-   draws omega uniformly from self.command_ranges["omega"] every time it
-   runs (on reset, and here on every mid-episode command switch) and passes
-   it straight to self.set_vel_cmd(vx, vy, omega) - there is no separate
-   command_omega/target_omega/omega_command attribute to patch after the
-   fact. Since Gen13 always constructs this env with
-   command_ranges={"omega": [0.0, 0.0]}, that uniform draw is already
-   guaranteed to return exactly 0.0, so the previous _force_zero_omega_command()
-   guesswork was unnecessary. It's been replaced with a one-time assertion
-   in __init__ that fails loudly if command_ranges["omega"] is ever
-   something other than [0.0, 0.0], instead of silently patching
-   nonexistent attributes.
+2. ABSOLUTE HEADING DRIFT (a real training-reward gap):
+   Nothing in the reward stack constrains the robot's *absolute* heading
+   over an episode:
+     - Go2WalkEnv._compute_reward()'s r_ang term tracks *instantaneous*
+       angular velocity (qvel[5]) against the commanded omega (always 0.0
+       here) via a Gaussian bonus (ang_vel_weight=0.5,
+       angular_tracking_variance=0.5) plus a squared-error term whose
+       weight (angular_error_weight) defaults to 0.0 in WalkRewardConfig
+       and is never overridden by Gen13. With that weight at 0.0, the only
+       pressure against yaw rate is the Gaussian bonus, which is nearly
+       flat near zero error - so a small, persistent yaw-rate bias costs
+       the policy almost nothing per step, yet integrates into a large
+       heading change over a 12-60 second episode.
+     - r_orient (gravity projected into the body xy-plane) penalizes
+       roll/pitch tilt only; a robot that stays upright while yawing
+       produces ~zero projected-gravity error regardless of how much it
+       has turned.
+     - AngleAwareGo2WalkEnv's direction_error_weight term compares
+       body-frame actual velocity against body-frame commanded velocity
+       every step, so it is *structurally blind* to absolute heading
+       drift: as long as the legs walk "forward" relative to whatever way
+       the body currently happens to be facing, this term reports ~0
+       error even while the body slowly spins in the world frame.
+   This is consistent with what was seen in the Gen13 videos (heading
+   visibly different at the end of a clip vs. the start) despite good
+   walk_summary numbers.
+
+   Fix: FixedHeadingRandomAngleGo2WalkEnv now tracks the body yaw at
+   episode reset and adds an explicit heading_drift_weight term that
+   penalizes squared deviation from that reference yaw every step,
+   independent of the existing rate-based r_ang term.
+
+Everything else (physics, PPO overrides, curriculum shape, omega pinned to
+[0.0, 0.0]) is unchanged from Gen13.
+
+Retraining note: --source below defaults to Gen13's own best checkpoint
+(warm start - no need to re-learn omnidirectional translation from
+scratch), but the full GEN14_PROFILES curriculum is run again starting
+from stage 1's own ent_coef/learning_rate. Because each stage already
+force-applies its own learning_rate/ent_coef to the reloaded model before
+.learn() (the "Fix 1" behavior carried over from Gen13), this gives the
+policy a fresh, non-annealed exploration budget to actually unlearn
+whatever small yaw-drift habit it settled into under Gen13's reward,
+rather than continuing training under Gen13's already very low tail-stage
+ent_coef (0.0015), where there may not be enough exploration left to
+change gait habits.
 """
 from __future__ import annotations
 
@@ -60,30 +91,53 @@ from scripts.train_walk_gen11 import AngleAwareGo2WalkEnv, build_commands, eval_
 
 
 # -----------------------------------------------------------------------------
-# Gen13 environment
+# Gen14 command set (translation-only subset of Gen11's build_commands())
+# -----------------------------------------------------------------------------
+def build_commands_fixed_heading() -> dict:
+    """Gen13/Gen14はomegaを一切学習していないため、build_commands()が持つ
+    旋回系6コマンド (turn_left_sprint, turn_right_sprint, left_turn,
+    right_turn, back_left_turn, back_right_turn) を評価・動画対象から除外
+    する。これらはomega != 0を要求するが、command_ranges["omega"]は常に
+    [0.0, 0.0]で学習しているため、評価時にこれらを直接set_vel_cmd()して
+    しまうと方策が学習中に一度も見たことのない入力を受け取ることになり、
+    停止に近い挙動になる（Gen13で実際に観測された）。
+    """
+    return {
+        name: cmd
+        for name, cmd in build_commands().items()
+        if abs(cmd[2]) < 1e-9  # omega成分がゼロのコマンドのみ残す
+    }
+
+
+# -----------------------------------------------------------------------------
+# Gen14 environment
 # -----------------------------------------------------------------------------
 class FixedHeadingRandomAngleGo2WalkEnv(AngleAwareGo2WalkEnv):
-    """Random translation direction training with commanded yaw permanently disabled.
+    """Gen13の固定方位・全方位並進環境に、絶対ヨードリフトへの直接ペナルティ
+    を追加したもの。
 
-    The target movement direction can be anywhere in the 360-degree plane, but
-    the command never asks the robot to rotate in place or turn toward that
-    direction.  The policy therefore has to learn accurate vx/vy translation
-    while keeping the commanded omega at zero.
+    AngleAwareGo2WalkEnv._sample_angle_command()は常にomegaを
+    self.command_ranges["omega"]から一様サンプリングしてself.set_vel_cmd()
+    に渡す。command_ranges={"omega": [0.0, 0.0]}で構築する限りomegaは常に
+    0.0になる（Gen13から変更なし）。
 
-    AngleAwareGo2WalkEnv._sample_angle_command() always draws omega uniformly
-    from self.command_ranges["omega"] (both on reset and here, on every
-    mid-episode command switch) and hands it straight to
-    self.set_vel_cmd(vx, vy, omega). There is no separate omega attribute to
-    patch after the fact - as long as this env is constructed with
-    command_ranges={"omega": [0.0, 0.0]} (which every call site in this
-    module does), that uniform draw is mathematically guaranteed to return
-    0.0 every time. The assertion below only guards against someone changing
-    that construction later and forgetting to keep omega pinned to zero.
+    Gen13にはなかった追加要素：
+    - reset()時点のヨー角を self._reference_yaw に保存
+    - 毎ステップ、現在のヨー角がその基準からどれだけずれているかを
+      (ラップした角度)^2 * heading_drift_weight としてrewardに加算
     """
 
-    def __init__(self, *args, command_switch_steps=150, **kwargs):
+    def __init__(
+        self,
+        *args,
+        command_switch_steps=150,
+        heading_drift_weight=-1.0,
+        **kwargs,
+    ):
         self.command_switch_steps = max(1, int(command_switch_steps))
         self._command_step_counter = 0
+        self.heading_drift_weight = float(heading_drift_weight)
+        self._reference_yaw = 0.0
         super().__init__(*args, **kwargs)
 
         omega_lo, omega_hi = self.command_ranges["omega"]
@@ -98,9 +152,28 @@ class FixedHeadingRandomAngleGo2WalkEnv(AngleAwareGo2WalkEnv):
                 "to zero elsewhere."
             )
 
+    # --------------------------------------------------------
+    # Absolute yaw tracking
+    # --------------------------------------------------------
+
+    def _current_yaw(self) -> float:
+        """MuJoCoのfree jointは qpos[3:7] = [w, x, y, z]（MuJoCo規約）。
+        Z-upワールドでのヨー角（ロール・ピッチに依存しない）を返す。
+        """
+        w, x, y, z = self.data.qpos[3:7]
+        return math.atan2(
+            2.0 * (w * z + x * y),
+            1.0 - 2.0 * (y * y + z * z),
+        )
+
     def reset(self, *, seed=None, options=None):
         obs, info = super().reset(seed=seed, options=options)
         self._command_step_counter = 0
+        # エピソード開始時点の向きを、このエピソード全体の基準方位とする。
+        # コマンド切り替え(_sample_angle_command)のたびには更新しない:
+        # 「毎回指示方向へ正確に並進できるか」とは独立に、「エピソードを
+        # 通して体が勝手に回転し続けていないか」を見たいため。
+        self._reference_yaw = self._current_yaw()
         return obs, info
 
     def step(self, action):
@@ -119,11 +192,27 @@ class FixedHeadingRandomAngleGo2WalkEnv(AngleAwareGo2WalkEnv):
 
         return obs, reward, terminated, truncated, info
 
+    def _compute_reward(self, action: np.ndarray) -> float:
+        # AngleAwareGo2WalkEnv._compute_reward()（並進方向誤差ペナルティを
+        # 含む）→ Go2WalkEnv._compute_reward()（基礎報酬一式）の順で呼ばれる。
+        reward = super()._compute_reward(action)
+
+        yaw_drift = self._wrap_angle_rad(
+            self._current_yaw() - self._reference_yaw
+        )
+        reward += self.heading_drift_weight * (yaw_drift ** 2)
+
+        return reward
+
 
 # -----------------------------------------------------------------------------
 # Curriculum
 # -----------------------------------------------------------------------------
-GEN13_PROFILES = {
+# steps/speed/angle/direction_error_weight/switch_steps/ent_coef/learning_rate
+# はGen13からそのまま引き継ぎ（並進精度は既に良好だったため）。
+# heading_drift_weightのみ新規追加。値は暫定の出発点であり、最初の短い
+# テストステージの結果を見て調整する前提。
+GEN14_PROFILES = {
     "fixed_heading": [
         dict(
             name="fixed_heading_foundation",
@@ -132,6 +221,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-1.5,
+            heading_drift_weight=-1.0,
             switch_steps=250,
             ent_coef=0.0025,
             learning_rate=1.00e-5,
@@ -143,6 +233,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-2.0,
+            heading_drift_weight=-1.5,
             switch_steps=220,
             ent_coef=0.0023,
             learning_rate=9.5e-6,
@@ -154,6 +245,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-2.5,
+            heading_drift_weight=-2.0,
             switch_steps=180,
             ent_coef=0.0021,
             learning_rate=9.0e-6,
@@ -165,6 +257,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-3.0,
+            heading_drift_weight=-2.5,
             switch_steps=150,
             ent_coef=0.0019,
             learning_rate=8.8e-6,
@@ -176,6 +269,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-3.2,
+            heading_drift_weight=-3.0,
             switch_steps=120,
             ent_coef=0.0017,
             learning_rate=8.5e-6,
@@ -187,6 +281,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-3.2,
+            heading_drift_weight=-3.0,
             switch_steps=100,
             ent_coef=0.0016,
             learning_rate=8.2e-6,
@@ -198,6 +293,7 @@ GEN13_PROFILES = {
             angle=[-180.0, 180.0],
             omega=[0.0, 0.0],
             direction_error_weight=-3.0,
+            heading_drift_weight=-3.5,
             switch_steps=80,
             ent_coef=0.0015,
             learning_rate=8.0e-6,
@@ -206,8 +302,8 @@ GEN13_PROFILES = {
 }
 
 
-GEN13_PPO_OVERRIDES = dict(base.SPEED_PPO_OVERRIDES)
-GEN13_PPO_OVERRIDES.update({
+GEN14_PPO_OVERRIDES = dict(base.SPEED_PPO_OVERRIDES)
+GEN14_PPO_OVERRIDES.update({
     "target_kl": 0.007,
     "n_epochs": 5,
 })
@@ -215,24 +311,24 @@ GEN13_PPO_OVERRIDES.update({
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Generation-13 fixed-heading omnidirectional walk evolution."
+        description="Generation-14 fixed-heading, heading-stable omnidirectional walk evolution."
     )
     parser.add_argument(
         "--source",
-        default="runs/walk_base/walk_gen12_random_angle_001/best",
-        help="Gen12 best model directory.",
+        # Gen13の最終チェックポイントからウォームスタートする。
+        # 並進精度はGen13で既に良好 (mean_direction_error ~3.07 deg,
+        # fall 0件, turn系コマンド除外後) だったため、ゼロから学習し直す
+        # 必要はない。カリキュラムは各ステージが自前のent_coef/
+        # learning_rateを毎回上書きするため、この重み継続でも
+        # ステージ1から探索の余地は確保される。
+        default="runs/walk_base/walk_gen13_fixed_heading_002/best",
+        help="Gen13 best model directory.",
     )
     parser.add_argument("--output-root", default="runs/walk_base")
     parser.add_argument("--run-name", default=None)
     parser.add_argument(
         "--profile",
-        choices=sorted(GEN13_PROFILES),
-        # Fix 2: this must be a real key of GEN13_PROFILES. The stale
-        # Gen12-era default ("random_angle") is not a key here, and argparse
-        # does NOT validate `default` against `choices` - so a run without
-        # --profile passed explicitly would previously reach
-        # `GEN13_PROFILES[args.profile]` below and raise KeyError('random_angle')
-        # immediately, before any training happened.
+        choices=sorted(GEN14_PROFILES),
         default="fixed_heading",
     )
     parser.add_argument("--num-envs", type=int, default=30)
@@ -252,14 +348,14 @@ def main() -> None:
     if not source.exists():
         raise FileNotFoundError(f"Source model was not found: {source}")
 
-    run_name = args.run_name or f"{time.strftime('%Y%m%d_%H%M%S')}_walk_gen13"
+    run_name = args.run_name or f"{time.strftime('%Y%m%d_%H%M%S')}_walk_gen14"
     run_dir = Path(args.output_root) / run_name
     run_dir.mkdir(parents=True, exist_ok=False)
 
     base.copy_base(source, run_dir)
 
     seeds = [int(x) for x in args.seeds.replace(",", " ").split()]
-    stages = GEN13_PROFILES[args.profile]
+    stages = GEN14_PROFILES[args.profile]
 
     common_physics = {
         "action_scale": 0.6,
@@ -281,14 +377,15 @@ def main() -> None:
     history = []
 
     for stage_index, stage in enumerate(
-        tqdm(stages, desc="gen13 stages", unit="stage")
+        tqdm(stages, desc="gen14 stages", unit="stage")
     ):
-        print(f"\n=== Gen13 stage {stage_index + 1}/{len(stages)}: {stage['name']} ===", flush=True)
+        print(f"\n=== Gen14 stage {stage_index + 1}/{len(stages)}: {stage['name']} ===", flush=True)
         print(f"steps={stage['steps']}", flush=True)
         print(f"speed={stage['speed']}", flush=True)
         print(f"angle={stage['angle']}", flush=True)
         print(f"omega={stage['omega']}", flush=True)
         print(f"direction_error_weight={stage['direction_error_weight']}", flush=True)
+        print(f"heading_drift_weight={stage['heading_drift_weight']}", flush=True)
         print(f"random_angle_switch_steps={stage['switch_steps']}", flush=True)
 
         def make_env():
@@ -299,6 +396,7 @@ def main() -> None:
                 direction_error_weight=stage["direction_error_weight"],
                 direction_error_speed_threshold=0.15,
                 actual_speed_threshold=0.05,
+                heading_drift_weight=stage["heading_drift_weight"],
                 command_switch_steps=stage["switch_steps"],
                 **common_physics,
                 command_ranges={
@@ -338,22 +436,17 @@ def main() -> None:
             device=args.device,
         )
 
-        # Fix 1: actually apply this stage's learning_rate and ent_coef to the
-        # reloaded model before training on it. PPO.load() restores whatever
-        # learning_rate/ent_coef were saved with the checkpoint, which is NOT
-        # automatically updated to this stage's curriculum values. ent_coef is
-        # a plain float read directly during PPO's train() loop, so setting it
-        # is enough. learning_rate is driven by an internal lr_schedule
-        # callable, so we also have to rebuild that schedule - just assigning
-        # model.learning_rate would silently have no effect on the optimizer.
+        # Fix 1 (carried over from Gen13): actually apply this stage's
+        # learning_rate and ent_coef to the reloaded model before training
+        # on it, rather than relying on whatever was saved with the
+        # checkpoint (which would otherwise silently keep Gen13's final,
+        # heavily-annealed tail-stage values).
         model.learning_rate = stage["learning_rate"]
         model.lr_schedule = get_schedule_fn(stage["learning_rate"])
         model.ent_coef = stage["ent_coef"]
 
-        # ppo_kwargs is recorded to walk_params.json for reproducibility. It
-        # now matches what was actually applied to `model` above.
         ppo_kwargs = dict(
-            GEN13_PPO_OVERRIDES,
+            GEN14_PPO_OVERRIDES,
             device=args.device,
             learning_rate=stage["learning_rate"],
             ent_coef=stage["ent_coef"],
@@ -364,7 +457,7 @@ def main() -> None:
         checkpoint = CheckpointCallback(
             save_freq=max(20_000 // max(args.num_envs, 1), 1),
             save_path=str(checkpoint_dir),
-            name_prefix="walk_gen13",
+            name_prefix="walk_gen14",
             save_vecnormalize=True,
         )
 
@@ -380,7 +473,7 @@ def main() -> None:
 
         params = {
             "kind": "walk",
-            "generation": 13,
+            "generation": 14,
             "source": str(source),
             "stage": stage,
             "physics": common_physics,
@@ -396,6 +489,12 @@ def main() -> None:
                 "continuous_uniform_angle": True,
                 "translation_only": True,
                 "direction_error_weight": stage["direction_error_weight"],
+                "heading_drift_weight": stage["heading_drift_weight"],
+                "heading_drift_formula": (
+                    "heading_drift_weight * "
+                    "wrap(current_yaw - reference_yaw_at_episode_reset)^2"
+                ),
+                "eval_commands": "build_commands_fixed_heading() (omega==0 subset only)",
             },
             "ppo": ppo_kwargs,
             "vec_env_cls": "SubprocVecEnv",
@@ -407,15 +506,18 @@ def main() -> None:
         )
 
         history.append({"stage": stage, "params": params})
-        (run_dir / "gen13_curriculum.json").write_text(
+        (run_dir / "gen14_curriculum.json").write_text(
             json.dumps(history, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 
         vec_env.close()
 
-    # Reuse Gen13/Gen11-compatible deterministic angle evaluation for a clean comparison.
-    commands = build_commands()
+    # Gen11-compatible deterministic angle evaluation, but restricted to the
+    # omega==0 subset of commands (see build_commands_fixed_heading() above)
+    # so turn-only commands never get fed to a model that never trained on
+    # a nonzero omega.
+    commands = build_commands_fixed_heading()
     walk_rows, walk_summary = eval_angle_walk(
         run_dir,
         commands,
@@ -431,15 +533,15 @@ def main() -> None:
     )
 
     result = {
-        "generation": 13,
-        "goal": "accurate 360-degree translation with fixed heading and zero commanded yaw",
+        "generation": 14,
+        "goal": "accurate 360-degree translation with fixed heading, zero commanded yaw, and bounded absolute heading drift",
         "source": str(source),
         "walk_summary": walk_summary,
         "tag_summary": tag_summary,
         "walk_rows": walk_rows,
         "tag_rows": tag_rows,
     }
-    (run_dir / "gen13_evaluation.json").write_text(
+    (run_dir / "gen14_evaluation.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
@@ -448,7 +550,7 @@ def main() -> None:
     best_dir.mkdir(exist_ok=True)
     for name in base.REQUIRED:
         shutil.copy2(run_dir / name, best_dir / name)
-    (best_dir / "best_gen13_record.json").write_text(
+    (best_dir / "best_gen14_record.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )

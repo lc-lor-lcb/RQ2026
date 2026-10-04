@@ -1,0 +1,87 @@
+{
+  "kind": "walk",
+  "generation": 12,
+  "source": "runs\\walk_base\\walk_gen11_main_001\\best",
+  "stage": {
+    "name": "final_random_angle",
+    "steps": 1500000,
+    "speed": [
+      0.3,
+      1.4
+    ],
+    "angle": [
+      -180.0,
+      180.0
+    ],
+    "omega": [
+      -0.9,
+      0.9
+    ],
+    "direction_error_weight": -2.4,
+    "switch_steps": 60,
+    "ent_coef": 0.0015,
+    "learning_rate": 8e-06
+  },
+  "physics": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ]
+  },
+  "walk_env_kwargs": {
+    "action_scale": 0.6,
+    "joint_stiffness": 60.0,
+    "joint_damping": 2.0,
+    "torque_limits": [
+      23.7,
+      23.7,
+      45.43
+    ],
+    "command_mode": "uniform",
+    "command_ranges": {
+      "vx": [
+        -1.4,
+        1.4
+      ],
+      "vy": [
+        -1.2,
+        1.2
+      ],
+      "omega": [
+        -0.9,
+        0.9
+      ]
+    }
+  },
+  "random_angle_training": {
+    "enabled": true,
+    "speed_range": [
+      0.3,
+      1.4
+    ],
+    "angle_range_deg": [
+      -180.0,
+      180.0
+    ],
+    "omega_range": [
+      -0.9,
+      0.9
+    ],
+    "command_switch_steps": 60,
+    "continuous_uniform_angle": true,
+    "direction_error_weight": -2.4
+  },
+  "ppo": {
+    "learning_rate": 8e-06,
+    "target_kl": 0.007,
+    "n_epochs": 5,
+    "ent_coef": 0.0015,
+    "device": "cuda"
+  },
+  "vec_env_cls": "SubprocVecEnv",
+  "num_envs": 32
+}
